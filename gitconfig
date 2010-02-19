@@ -1,0 +1,16 @@
+[user]
+	name = Tiago Miguel Cavaco Rodrigues
+	email = tmcrodrigues@gmail.com
+[gui]
+	fontui = -family \"bitstream vera sans\" -size 9 -weight bold -slant roman -underline 0 -overstrike 0
+	fontdiff = -family \"bitstream vera sans mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
+[alias]
+    ci = commit
+    co = checkout
+    st = status
+    br = branch
+    mg = merge
+    spush = svn dcommit
+    spull = svn rebase
+    lg = log --color
+    di = diff --color
