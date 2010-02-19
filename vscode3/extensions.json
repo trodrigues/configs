@@ -1,0 +1,29 @@
+{
+    "extensions": [
+        "akamud.vscode-theme-onelight",
+        "alefragnani.project-manager",
+        "arcticicestudio.nord-visual-studio-code",
+        "bungcip.better-toml",
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "erik-rosengren.dark-candy",
+        "esbenp.prettier-vscode",
+        "GitHub.vscode-pull-request-github",
+        "golf1052.code-sync",
+        "imperez.smarty",
+        "johnpapa.vscode-peacock",
+        "lextudio.restructuredtext",
+        "luqimin.tiny-light",
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "nopjmp.fairyfloss",
+        "octref.vetur",
+        "Retsam19.typescript-types-view",
+        "ricard.postcss",
+        "ronnidc.nunjucks",
+        "silvenon.mdx",
+        "SmukkeKim.theme-setimonokai",
+        "vscodevim.vim",
+        "wesbos.theme-cobalt2"
+    ]
+}

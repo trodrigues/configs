@@ -1,8 +1,4 @@
-.gitignore
 *.swp
-*.pyc
 .DS_Store
-index.js
-bundles.php
-snippets.php
-.htaccess
+npm-debug.log
+node_modules

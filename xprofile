@@ -1,0 +1,1 @@
+bash -c "sleep 2; $HOME/Dropbox/configs/xrandr/xrandr_2560.sh" &

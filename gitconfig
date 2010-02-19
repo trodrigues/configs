@@ -1,16 +1,42 @@
 [user]
-	name = Tiago Miguel Cavaco Rodrigues
+	name = Tiago Rodrigues
 	email = tmcrodrigues@gmail.com
-[gui]
-	fontui = -family \"bitstream vera sans\" -size 9 -weight bold -slant roman -underline 0 -overstrike 0
-	fontdiff = -family \"bitstream vera sans mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 [alias]
     ci = commit
-    co = checkout
+    sw = switch
     st = status
     br = branch
     mg = merge
+    cp = cherry-pick
     spush = svn dcommit
     spull = svn rebase
     lg = log --color
     di = diff --color
+    dito = difftool
+    standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
+    show-files = show --name-status
+    last-hash = log -n 1 --format=%h
+    wip = commit -am "wip" --no-verify
+    soft-reset = reset HEAD~1
+[core]
+	excludesfile = /Users/trodrigues/.gitignore_global
+[difftool]
+	prompt = false
+[color]
+	ui = true
+[branch]
+  autosetuprebase = always
+[push]
+	default = simple
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[init]
+	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

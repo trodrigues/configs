@@ -1,0 +1,7 @@
+bind generic H !@sh gitsh
+bind generic I !@sh -c "echo %(commit) | pbcopy"
+bind status A !git commit --amend
+bind status Z !git cz
+set main-view-date = relative-compact
+set main-view-author-display = abbreviated
+set main-view-author-maxwidth = 10
