@@ -129,7 +129,19 @@ function prompt {
 }
 prompt
 
-export PYTHONPATH="/Users/trodrigues/Code/evernote-api-1.14/lib/python"
+export PYTHONPATH="/Users/trodrigues/Code/bliki/evernote-api-1.14/lib/python"
+
+reloadzshrc() {
+    if [ -f $HOME/Dropbox/configs/zshrc ] ; then
+        cp $HOME/Dropbox/configs/zshrc $HOME/.zshrc
+    else
+        echo "fetching from github"
+        wget http://github.com/trodrigues/configs/raw/master/zshrc
+        cp zshrc $HOME/.zshrc
+        rm -f zshrc
+    fi
+    source $HOME/.zshrc
+}
 
 # manage webserver
 start_nginx(){
@@ -146,6 +158,10 @@ start_phpfcgi(){
 
 stop_phpfcgi(){
     sudo launchctl unload /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.php-fastcgi.plist
+}
+
+start_mysql(){
+    sudo /opt/local/lib/mysql5/bin/mysqld_safe &
 }
 
 reload_webserver(){
@@ -167,6 +183,10 @@ compress_js(){
     /opt/local/bin/jsmin <$1> $minified
 }
 
+goodfellas_update(){
+    scp "sprawl:/home/trodrigues/trodrigues.net/htdocs/bons_rapazes/*.ogg" $HOME/Dropbox/bons_rapazes/
+}
+
 # my aliases
 alias ls="ls $colorarg"
 alias ll="ls $colorarg -l"
@@ -181,7 +201,6 @@ alias killpid="$HOME/code/bashscripts/kill_by_pid.sh"
 alias tailaccess="tail -f $httpd_accesslog"
 alias tailerror="tail -f $httpd_errorlog"
 alias reloadbashrc="cp $HOME/Dropbox/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
-alias reloadzshrc="cp $HOME/Dropbox/configs/zshrc $HOME/.zshrc && source $HOME/.zshrc"
 
 alias antena3="mplayer mms://rdp.oninet.pt/antena3"
 alias starcraft="wine software/games/Starcraft/StarCraft.exe"
