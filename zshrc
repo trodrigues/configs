@@ -51,10 +51,13 @@ uname=$(uname)
 
 # colors for ls, etc.
 if [ "$uname" = "Darwin" ] ; then
-    export PATH="$PATH:$HOME/Code/android-sdk-mac_86/tools:$HOME/Code/BlackBerry/SDK/net.rim.eide.componentpack4.7.0_4.7.0.46/components/bin:$HOME/Code/github/narwhal/bin"
+    export PATH="$PATH:$HOME/Code/android-sdk-mac_86/tools"
+    export PATH="$PATH:$HOME/Code/BlackBerry/SDK/net.rim.eide.componentpack4.7.0_4.7.0.46/components/bin"
+    export PATH="$PATH:$HOME/Code/github/narwhal/bin"
+    export PATH="$PATH:/opt/PalmSDK/Current/bin"
+    export PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
     httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
     httpd_errorlog="/opt/local/etc/nginx/logs/error.log"
-    PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
     colorarg="-G"
     # increase the number of processes per uid
     ulimit -u 400
@@ -62,9 +65,9 @@ fi
 
 if [ "$uname" = "Linux" ] ; then
     export PATH="$PATH:/opt/cxoffice/bin:Software/android-sdk-linux_x86-1.6_r1/tools"
+    export PATH="$PATH:/usr/local/git/bin:/opt/local/bin"
     httpd_accesslog="/var/log/apache2/access.log"
     httpd_errorlog="/var/log/apache2/error.log"
-    PATH="$PATH:/usr/local/git/bin:/opt/local/bin"
     colorarg="--color"
 fi
 
