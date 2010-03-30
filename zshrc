@@ -218,3 +218,6 @@ alias mytvshows="$HOME/Code/bashscripts/mytvshows.sh"
 
 alias rhino="java -jar /Users/trodrigues/Code/javascript/rhino1_7R2/js.jar"
 alias jslint="java -jar /Users/trodrigues/Code/javascript/rhino1_7R2/js.jar /Users/trodrigues/Code/javascript/jslint.js"
+
+alias cdlibsapo="cd $HOME/Code/sapo/libsapojs/branches/staging/tree/SAPO/"
+alias make_index_links="$HOME/Code/sapo/libsapojs/branches/staging/scripts/make_index_links.py"
