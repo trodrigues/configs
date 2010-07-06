@@ -216,8 +216,10 @@ alias add_package_key="bash $HOME/code/bashscripts/add_package_key.sh"
 alias present="python $HOME/software/impressive/impressive.py -c memory -T 200 -t Crossfade,WipeLeft "
 alias mytvshows="$HOME/Code/bashscripts/mytvshows.sh"
 
-alias rhino="java -jar /Users/trodrigues/Code/javascript/rhino1_7R2/js.jar"
-alias jslint="java -jar /Users/trodrigues/Code/javascript/rhino1_7R2/js.jar /Users/trodrigues/Code/javascript/jslint.js"
+alias rhino="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar"
+alias jslint="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar $HOME/Code/javascript/jslint.js"
+alias yuicompressor="java -jar $HOME/Code/javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar"
+alias closurecompiler="java -jar $HOME/Code/javascript/compiler-latest/compiler.jar"
 
 alias cdlibsapo="cd $HOME/Code/sapo/libsapojs/branches/staging/tree/SAPO/"
 alias make_index_links="$HOME/Code/sapo/libsapojs/branches/staging/scripts/make_index_links.py"
