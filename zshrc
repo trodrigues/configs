@@ -54,10 +54,13 @@ if [ "$uname" = "Darwin" ] ; then
     export PATH="$PATH:$HOME/Code/android-sdk-mac_86/tools"
     export PATH="$PATH:$HOME/Code/BlackBerry/SDK/net.rim.eide.componentpack4.7.0_4.7.0.46/components/bin"
     export PATH="$PATH:$HOME/Code/github/narwhal/bin"
+    export PATH="$PATH:$HOME/Code/javascript/node/bin"
     export PATH="$PATH:/opt/PalmSDK/Current/bin"
     export PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
+    export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
     httpd_errorlog="/opt/local/etc/nginx/logs/error.log"
+    alias mindlocker="mate /Users/trodrigues/Dropbox/mindlocker/"
     colorarg="-G"
     # increase the number of processes per uid
     ulimit -u 400
@@ -196,6 +199,8 @@ alias ll="ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
 
+alias stkeys="/home/trodrigues/dtleys.sh"
+
 alias rm_pyc="find . -name \"*.pyc\" -exec rm '{}' \;"
 alias rm_swp="find . -name \"*.swp\" -exec rm '{}' \;"
 alias rm_vim_mchars="perl -pi -e '$m=chr(13);s/$m//g'"
@@ -223,3 +228,6 @@ alias closurecompiler="java -jar $HOME/Code/javascript/compiler-latest/compiler.
 
 alias cdlibsapo="cd $HOME/Code/sapo/libsapojs/branches/staging/tree/SAPO/"
 alias make_index_links="$HOME/Code/sapo/libsapojs/branches/staging/scripts/make_index_links.py"
+
+alias vmwarefusion_setports="sudo vim /Library/Application\ Support/VMware\ Fusion/vmnet8/nat.conf"
+alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart"
