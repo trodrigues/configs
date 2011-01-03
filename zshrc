@@ -56,6 +56,7 @@ if [ "$uname" = "Darwin" ] ; then
     export PATH="$PATH:$HOME/Code/github/narwhal/bin"
     export PATH="$PATH:$HOME/Code/javascript/node/bin"
     export PATH="$PATH:/opt/PalmSDK/Current/bin"
+    export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
     export PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
