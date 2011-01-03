@@ -69,6 +69,7 @@ fi
 if [ "$uname" = "Linux" ] ; then
     export PATH="$PATH:/opt/cxoffice/bin:Software/android-sdk-linux_x86-1.6_r1/tools"
     export PATH="$PATH:/usr/local/git/bin:/opt/local/bin"
+    export PATH="$PATH:$HOME/software/node/bin"
     httpd_accesslog="/var/log/apache2/access.log"
     httpd_errorlog="/var/log/apache2/error.log"
     colorarg="--color"
