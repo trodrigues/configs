@@ -143,7 +143,7 @@ reloadzshrc() {
         cp $HOME/Dropbox/configs/zshrc $HOME/.zshrc
     else
         echo "fetching from github"
-        wget --no-check-certificate http://github.com/trodrigues/configs/raw/master/zshrc
+        wget --no-check-certificate https://github.com/trodrigues/configs/raw/master/zshrc
         cp zshrc $HOME/.zshrc
         rm -f zshrc
     fi
