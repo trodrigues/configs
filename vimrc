@@ -1,59 +1,62 @@
 set nocompatible
+
+"tab stuff
 set autoindent
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 set smarttab
-set showmatch
-"set cursorline
-set backspace=indent,eol,start
 
+set encoding=utf-8
+set backspace=indent,eol,start
+set dictionary=/usr/share/dict/words
 set mouse=n
 
+"visual stuff
+set showmatch
+set ruler
+
+set incsearch
+set ignorecase
+set smartcase
+
+set showmode
+set showcmd 
+
+set scrolloff=10
+set sidescrolloff=6
+
 syntax on
+
 if (&term == "iterm") || (&term == "putty")
   set background=dark
 endif
-set ruler
-set dictionary=/usr/share/dict/words
-set incsearch
-filetype on
-filetype indent on
+
+colorscheme default
+
+filetype plugin indent on
 if(&filetype == "")
 	set filetype=txt
 endif
+
 autocmd FileType c,cpp :set cindent
 if has("autocmd")
     autocmd FileType python set complete+=k/home/trodrigues/.vim/pydiction-0.5/pydiction iskeyword+=.,(
 endif " has("autocmd")
 
-"colorscheme darkblue
-"colorscheme slate
-colorscheme default
-
-"set omnifunc=cppomnicomplete#Complete 
-
-filetype on
-filetype indent on
-filetype plugin on
-
 au BufNewFile,BufRead Jakefile set filetype=javascript
 
-set showmode
-set showcmd 
+" make sure mixed types get all the snippets they need
+autocmd FileType htmldjango :so ~/.vim/after/ftplugin/django_template_snippets.vim
+autocmd FileType htmldjango :so ~/.vim/after/ftplugin/xhtml_snippets.vim
 
-set ignorecase
-set smartcase
+"CHECK THIS
+"set omnifunc=cppomnicomplete#Complete 
 
-set scrolloff=2
-set sidescrolloff=2
-
-set wildmode=list:longest,full
+set wildmode=list:longest,list:full
 
 set history=100
-
-"set nu " line number
 
 set wrap
 set comments+=b:\"
@@ -62,12 +65,8 @@ set textwidth=75
 
 set modeline
 
-"python ctags
-"set tags+=$HOME/.vim/tags/python.ctags
-
-" make sure mixed types get all the snippets they need
-autocmd FileType htmldjango :so ~/.vim/after/ftplugin/django_template_snippets.vim
-autocmd FileType htmldjango :so ~/.vim/after/ftplugin/xhtml_snippets.vim
+" CTags CHECK ME
+"map C-t :!ctags --extra=+f -R *<CR><CR>
 
 "matching brackets
 inoremap {     {}<Left>
@@ -94,17 +93,19 @@ inoremap )     )<Esc>
                \endif<CR>
                \a
 
-noremap <Space> <PageDown>
-noremap - <Pageup>
+"noremap <Space> <PageDown>
+"noremap - <Pageup>
 
 "navigate through files
 "nnoremap <C-n> :next<CR>
 "nnoremap <C-p> :prev<CR>
 "navigate through tabs
 "nnoremap <C-A-PageDown> :tabn<CR>
-nnoremap <C-n> :tabn<CR>
+"nnoremap <C-n> :tabn<CR> "CHANGE TO UP/DOWN
 "nnoremap <C-A-PageUp> :tabp<CR>
-nnoremap <C-p> :tabp<CR>
+"nnoremap <C-p> :tabp<CR>
+
+nnoremap <C-t> :tabfind 
 
 cabbrev Wq wq
 
@@ -113,10 +114,9 @@ map <F7> <C-]>
 "opens the file under the cursor on a split window
 map <F8> <C-W>f <CR>
 "NERDTree shortcuts
-map <F2> :NERDTree<CR>
-map <F3> :NERDTreeClose<CR>
+map <F2> :NERDTreeToggle<CR>
 "Tag list plugin
-map <F4> :TlistToggle<CR>
+map <F3> :TlistToggle<CR>
 
 "change split windows forward/backward
 nnoremap <F5> <C-W>w
@@ -141,17 +141,8 @@ nnoremap <S-F9> :VCSAdd
 map <F12> :VCSLog<CR>
 map <S-F12> :VCSStatus<CR>
 
-":imap <Right> <nop>
-":map <Left> <nop>
-":imap <Left> <nop>
-":map <Up> <nop>
-":imap <Up> <nop>
-":map <Down> <nop>
-":imap <Down> <nop>
-"":map <End> <nop>
-":imap <End> <nop>
-":map <Home> <nop>
-":imap <Home> <nop>
+"Command-T
+nnoremap <D-t> :CommandT<CR>
 
 set laststatus=2
 set statusline=
