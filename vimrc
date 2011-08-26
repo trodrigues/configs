@@ -46,6 +46,7 @@ if has("autocmd")
 endif " has("autocmd")
 
 au BufNewFile,BufRead Jakefile set filetype=javascript
+au BufNewFile,BufRead *.as set filetype=actionscript
 
 " make sure mixed types get all the snippets they need
 autocmd FileType htmldjango :so ~/.vim/after/ftplugin/django_template_snippets.vim
@@ -117,6 +118,7 @@ map <F8> <C-W>f <CR>
 map <F2> :NERDTreeToggle<CR>
 "Tag list plugin
 map <F3> :TlistToggle<CR>
+map <F4> :e ++ff=dos<CR>
 
 "change split windows forward/backward
 nnoremap <F5> <C-W>w

@@ -2,7 +2,4 @@
 *.swp
 *.pyc
 .DS_Store
-index.js
-bundles.php
-snippets.php
 .htaccess

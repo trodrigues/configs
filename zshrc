@@ -56,7 +56,6 @@ if [ "$uname" = "Darwin" ] ; then
     export PATH="$PATH:$HOME/Code/github/narwhal/bin"
     export PATH="$PATH:$HOME/Code/javascript/node/bin"
     export PATH="$PATH:/opt/PalmSDK/Current/bin"
-    export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
     export PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
@@ -70,7 +69,6 @@ fi
 if [ "$uname" = "Linux" ] ; then
     export PATH="$PATH:/opt/cxoffice/bin:Software/android-sdk-linux_x86-1.6_r1/tools"
     export PATH="$PATH:/usr/local/git/bin:/opt/local/bin"
-    export PATH="$PATH:$HOME/software/node/bin"
     httpd_accesslog="/var/log/apache2/access.log"
     httpd_errorlog="/var/log/apache2/error.log"
     colorarg="--color"
@@ -137,14 +135,12 @@ function prompt {
 }
 prompt
 
-export PYTHONPATH="/Users/trodrigues/Code/bliki/evernote-api-1.14/lib/python"
-
 reloadzshrc() {
     if [ -f $HOME/Dropbox/configs/zshrc ] ; then
         cp $HOME/Dropbox/configs/zshrc $HOME/.zshrc
     else
         echo "fetching from github"
-        wget --no-check-certificate https://github.com/trodrigues/configs/raw/master/zshrc
+        wget http://github.com/trodrigues/configs/raw/master/zshrc
         cp zshrc $HOME/.zshrc
         rm -f zshrc
     fi
@@ -191,17 +187,11 @@ compress_js(){
     /opt/local/bin/jsmin <$1> $minified
 }
 
-goodfellas_update(){
-    scp "sprawl:/home/trodrigues/trodrigues.net/htdocs/bons_rapazes/*.ogg" $HOME/Dropbox/bons_rapazes/
-}
-
 # my aliases
 alias ls="ls $colorarg"
 alias ll="ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
-
-alias stkeys="/home/trodrigues/dtleys.sh"
 
 alias rm_pyc="find . -name \"*.pyc\" -exec rm '{}' \;"
 alias rm_swp="find . -name \"*.swp\" -exec rm '{}' \;"
@@ -212,24 +202,10 @@ alias tailaccess="tail -f $httpd_accesslog"
 alias tailerror="tail -f $httpd_errorlog"
 alias reloadbashrc="cp $HOME/Dropbox/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
 
-alias antena3="mplayer mms://rdp.oninet.pt/antena3"
-alias starcraft="wine software/games/Starcraft/StarCraft.exe"
-alias rtp1="mplayer mms://195.245.176.20/rtp"
-
-alias mp3showdir="python $HOME/code/python_scripts/show_all_mp3_tags.py"
-alias mp3renamedir="python $HOME/code/python_scripts/rename_mp3_dir.py"
-alias add_package_key="bash $HOME/code/bashscripts/add_package_key.sh"
-
-alias present="python $HOME/software/impressive/impressive.py -c memory -T 200 -t Crossfade,WipeLeft "
-alias mytvshows="$HOME/Code/bashscripts/mytvshows.sh"
-
 alias rhino="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar"
 alias jslint="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar $HOME/Code/javascript/jslint.js"
 alias yuicompressor="java -jar $HOME/Code/javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar"
 alias closurecompiler="java -jar $HOME/Code/javascript/compiler-latest/compiler.jar"
-
-alias cdlibsapo="cd $HOME/Code/sapo/libsapojs/branches/staging/tree/SAPO/"
-alias make_index_links="$HOME/Code/sapo/libsapojs/branches/staging/scripts/make_index_links.py"
 
 alias vmwarefusion_setports="sudo vim /Library/Application\ Support/VMware\ Fusion/vmnet8/nat.conf"
 alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart"
