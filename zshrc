@@ -62,6 +62,9 @@ if [ "$uname" = "Darwin" ] ; then
     httpd_errorlog="/opt/local/etc/nginx/logs/error.log"
     alias mindlocker="mate /Users/trodrigues/Dropbox/mindlocker/"
     colorarg="-G"
+
+    alias jstd="/Users/Tiago.Rodrigues/Code/scripts/shell/js_test_driver.sh"
+    alias s3helper="/Users/Tiago.Rodrigues/Code/scripts/shell/s3helper.sh"
     # increase the number of processes per uid
     ulimit -u 400
 fi
