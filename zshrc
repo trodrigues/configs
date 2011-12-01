@@ -48,25 +48,20 @@ vim=vi
 export EDITOR=/usr/bin/vi
 
 uname=$(uname)
+export CODEHOME="$HOME/Dropbox/code/"
+export CONFIGSHOME="$HOME/Dropbox/configs/"
 
 # colors for ls, etc.
 if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
-    export CODEHOME="$HOME/Dropbox/code/"
-    export CONFIGSHOME="$HOME/Dropbox/configs/"
     colorarg="-G"
 
     export CC="/Developer/usr/bin/gcc"
     export CXX="/Developer/usr/bin/g++"
     export LD="/Developer/usr/bin/gcc"
 
-    alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
-    alias nave="$CODEHOME/github/nave/nave.sh"
-    source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
-
-    alias reinstall_janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
     # increase the number of processes per uid
     ulimit -u 400
 fi
@@ -74,8 +69,6 @@ fi
 if [ "$uname" = "Linux" ] ; then
     export PATH="$PATH:/opt/cxoffice/bin:Software/android-sdk-linux_x86-1.6_r1/tools"
     export PATH="$PATH:/usr/local/git/bin:/opt/local/bin"
-    httpd_accesslog="/var/log/apache2/access.log"
-    httpd_errorlog="/var/log/apache2/error.log"
     colorarg="--color"
 fi
 
@@ -218,3 +211,10 @@ alias setgitignore="cp $HOME/Dropbox/configs/gitignore .gitignore"
 
 alias vmwarefusion_setports="sudo vim /Library/Application\ Support/VMware\ Fusion/vmnet8/nat.conf"
 alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart"
+
+alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
+alias nave="$CODEHOME/github/nave/nave.sh"
+alias reinstall_janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
+source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
+
+
