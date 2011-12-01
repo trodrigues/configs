@@ -64,6 +64,8 @@ if [ "$uname" = "Darwin" ] ; then
 
     # increase the number of processes per uid
     ulimit -u 400
+
+    source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
 fi
 
 if [ "$uname" = "Linux" ] ; then
@@ -215,6 +217,5 @@ alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusio
 alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
 alias nave="$CODEHOME/github/nave/nave.sh"
 alias reinstall_janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
-source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
 
 
