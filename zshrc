@@ -53,31 +53,20 @@ uname=$(uname)
 if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
-    export PATH="$PATH:$HOME/Code/android-sdk-mac_86/tools"
-    export PATH="$PATH:$HOME/Code/BlackBerry/SDK/net.rim.eide.componentpack4.7.0_4.7.0.46/components/bin"
-    export PATH="$PATH:$HOME/Code/github/narwhal/bin"
-    #export PATH="$PATH:$HOME/Code/javascript/node/bin"
-    export PATH="$PATH:/opt/PalmSDK/Current/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
-    httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
-    httpd_errorlog="/opt/local/etc/nginx/logs/error.log"
-    alias mindlocker="mate /Users/trodrigues/Dropbox/mindlocker/"
+    export CODEHOME="$HOME/Dropbox/code/"
+    export CONFIGSHOME="$HOME/Dropbox/configs/"
     colorarg="-G"
 
     export CC="/Developer/usr/bin/gcc"
     export CXX="/Developer/usr/bin/g++"
     export LD="/Developer/usr/bin/gcc"
 
-    alias jstd="/Users/trodrigues/Dropbox/code/scripts/shell/js_test_driver.sh"
-    alias s3helper="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/s3helper.sh"
-    alias fishdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/deploy_app_to_devserver.sh"
-    alias jsappdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/deploy_jsapp.sh"
-    alias buildtailor="ssh devbox \"cd machome/Code/playfish/COMMONS/tailor-game/server && mvn -U clean install\""
-    alias snapshotdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/snapshot_deploy.sh"
-    alias rebootdevbox="ssh devboxroot reboot"
-    alias nave="/Users/trodrigues/Dropbox/code/github/nave/nave.sh"
+    alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
+    alias nave="$CODEHOME/github/nave/nave.sh"
+    source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
 
-    alias reinstall_janus="/Users/trodrigues/Dropbox/code/scripts/shell/reinstall_janus.sh"
+    alias reinstall_janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
     # increase the number of processes per uid
     ulimit -u 400
 fi
