@@ -51,20 +51,33 @@ uname=$(uname)
 
 # colors for ls, etc.
 if [ "$uname" = "Darwin" ] ; then
+    export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export PATH="$PATH:$HOME/Code/android-sdk-mac_86/tools"
     export PATH="$PATH:$HOME/Code/BlackBerry/SDK/net.rim.eide.componentpack4.7.0_4.7.0.46/components/bin"
     export PATH="$PATH:$HOME/Code/github/narwhal/bin"
-    export PATH="$PATH:$HOME/Code/javascript/node/bin"
+    #export PATH="$PATH:$HOME/Code/javascript/node/bin"
     export PATH="$PATH:/opt/PalmSDK/Current/bin"
-    export PATH="$PATH:/usr/local/git/bin:/usr/local/bin:/opt/local/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     httpd_accesslog="/opt/local/etc/nginx/logs/access.log"
     httpd_errorlog="/opt/local/etc/nginx/logs/error.log"
     alias mindlocker="mate /Users/trodrigues/Dropbox/mindlocker/"
     colorarg="-G"
 
-    alias jstd="/Users/Tiago.Rodrigues/Code/scripts/shell/js_test_driver.sh"
-    alias s3helper="/Users/Tiago.Rodrigues/Code/scripts/shell/s3helper.sh"
+    export CC="/Developer/usr/bin/gcc"
+    export CXX="/Developer/usr/bin/g++"
+    export LD="/Developer/usr/bin/gcc"
+
+    alias jstd="/Users/trodrigues/Dropbox/code/scripts/shell/js_test_driver.sh"
+    alias s3helper="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/s3helper.sh"
+    alias fishdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/deploy_app_to_devserver.sh"
+    alias jsappdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/deploy_jsapp.sh"
+    alias buildtailor="ssh devbox \"cd machome/Code/playfish/COMMONS/tailor-game/server && mvn -U clean install\""
+    alias snapshotdeploy="/Users/trodrigues/Dropbox/code/scripts/shell/playfish/snapshot_deploy.sh"
+    alias rebootdevbox="ssh devboxroot reboot"
+    alias nave="/Users/trodrigues/Dropbox/code/github/nave/nave.sh"
+
+    alias reinstall_janus="/Users/trodrigues/Dropbox/code/scripts/shell/reinstall_janus.sh"
     # increase the number of processes per uid
     ulimit -u 400
 fi
@@ -196,6 +209,8 @@ alias ll="ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
 
+alias timestamp="date \"+%Y%m%d%H%M%S\""
+
 alias rm_pyc="find . -name \"*.pyc\" -exec rm '{}' \;"
 alias rm_swp="find . -name \"*.swp\" -exec rm '{}' \;"
 alias rm_vim_mchars="perl -pi -e '$m=chr(13);s/$m//g'"
@@ -209,6 +224,8 @@ alias rhino="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar"
 alias jslint="java -jar $HOME/Code/javascript/rhino1_7R2/js.jar $HOME/Code/javascript/jslint.js"
 alias yuicompressor="java -jar $HOME/Code/javascript/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar"
 alias closurecompiler="java -jar $HOME/Code/javascript/compiler-latest/compiler.jar"
+
+alias setgitignore="cp $HOME/Dropbox/configs/gitignore .gitignore"
 
 alias vmwarefusion_setports="sudo vim /Library/Application\ Support/VMware\ Fusion/vmnet8/nat.conf"
 alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart"
