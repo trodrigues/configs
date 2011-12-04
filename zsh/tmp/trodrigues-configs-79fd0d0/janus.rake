@@ -1,0 +1,8 @@
+skip_vim_plugin "nerdtree"
+skip_vim_plugin "conque"
+skip_vim_plugin "rails"
+skip_vim_plugin "rspec"
+skip_vim_plugin "cucumber"
+vim_plugin_task "sessionman", "git://github.com/vim-scripts/sessionman.vim.git"
+vim_plugin_task "preview", "git://github.com/greyblake/vim-preview.git"
+vim_plugin_task "vim-node.js", "git://github.com/mmalecki/vim-node.js.git"

@@ -1,0 +1,54 @@
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' completions 1
+zstyle ':completion:*' glob 1
+zstyle ':completion:*' max-errors 0
+zstyle ':completion:*' prompt 'Found %e errors'
+zstyle ':completion:*' substitute 1
+
+sshconfig="$HOME/.ssh/config"
+zstyle ':completion:*:(ssh|scp|sftp):*' hosts $sshconfig
+zstyle :compinstall filename '$HOME/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=6000
+SAVEHIST=6000
+setopt appendhistory extendedglob nomatch notify promptsubst 
+setopt completealiases vi zle
+unsetopt autocd beep
+bindkey -v
+# End of lines configured by zsh-newuser-install
+
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
+
+uname=$(uname)
+export CODEHOME="$HOME/Dropbox/code"
+export CONFIGSHOME="$HOME/Dropbox/configs"
+
+export EDITOR=/usr/bin/vi
+
+load_zsh_config(){
+    local configfile=$CONFIGSHOME/zsh/$1.zsh
+    if [ -f $configfile ] ; then
+        source $configfile
+    else
+        echo "Cannot load $configfile"
+    fi
+}
+
+load_zsh_config zsh_helpers
+
+load_zsh_config visudo
+load_zsh_config darwin_configs
+load_zsh_config linux_configs
+
+load_zsh_config prompt
+
+load_zsh_config aliases
