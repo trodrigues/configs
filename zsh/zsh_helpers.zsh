@@ -1,13 +1,21 @@
+SOURCE_ZSH_CONFIG_DIR="$CONFIGSHOME/zsh"
+SOURCE_ZSH_CONFIG_FILE="$SOURCE_ZSH_CONFIG_DIR/zshrc"
+ZSH_CONFIG_DIR="$HOME/.zsh"
+ZSH_CONFIG_FILE="$HOME/.zshrc"
+
+alias showzshrefcard="echo http://www.bash2zsh.com/zsh_refcard/refcard.pdf && echo https://github.com/robbyrussell/oh-my-zsh/tree/master/lib"
+
 reloadzshrc() {
-    if [ -f $CONFIGSHOME/zsh/zshrc ] ; then
+    if [ -f $SOURCE_ZSH_CONFIG_FILE ] ; then
         echo "reloading from Dropbox"
-        cp $CONFIGSHOME/zsh/zshrc $HOME/.zshrc
+        cp $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
     else
         echo "fetching from github"
-        if [ ! -d $HOME/.zsh ] ; then mkdir $HOME/.zsh ; fi
-        if [ ! -d $HOME/.zsh/tmp ] ; then mkdir $HOME/.zsh/tmp ; fi
-        cd $HOME/.zsh/tmp
+        if [ ! -d $ZSH_CONFIG_DIR ] ; then mkdir $ZSH_CONFIG_DIR ; fi
+        if [ ! -d $ZSH_CONFIG_DIR/tmp ] ; then mkdir $ZSH_CONFIG_DIR/tmp ; fi
+        cd $ZSH_CONFIG_DIR/tmp
         curl https://nodeload.github.com/trodrigues/configs/tarball/master -o configs.tar.gz
+
         if [ -f configs.tar.gz ] ; then
             tar xvzf configs.tar.gz
             rm -f configs.tar.gz
@@ -15,9 +23,30 @@ reloadzshrc() {
             cp -r */zsh/* ../
             cd .. && rm -rf tmp
 
-            cp zshrc $HOME/.zshrc
+            cp zshrc $ZSH_CONFIG_FILE
         fi
     fi
-    source $HOME/.zshrc
+    source $ZSH_CONFIG_FILE
+}
+
+editzshrc() {
+    echo "What do you want to edit ?"
+    echo "0) Just open the directory in macvim"
+    echo ""
+    echo "1) Main config file"
+    echo "2) Aliases"
+    echo "3) Zsh helpers"
+    echo "4) Darwin configs"
+    echo "5) Linux configs"
+    read action
+
+    case "$action" in
+        0) mvim $SOURCE_ZSH_CONFIG_DIR ;;
+        1) vim $SOURCE_ZSH_CONFIG_FILE ;;
+        2) vim $SOURCE_ZSH_CONFIG_DIR/aliases.zsh ;;
+        3) vim $SOURCE_ZSH_CONFIG_DIR/zsh_helpers.zsh ;;
+        4) vim $SOURCE_ZSH_CONFIG_DIR/darwin_configs.zsh ;;
+        5) vim $SOURCE_ZSH_CONFIG_DIR/linux_configs.zsh ;;
+    esac
 }
 
