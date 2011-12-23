@@ -3,6 +3,10 @@ alias ll="ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
 
+alias pu="pushd"
+alias po="popd"
+alias mdkir="mkdir -p"
+
 alias timestamp="date \"+%Y%m%d%H%M%S\""
 
 alias rm_pyc="find . -name \"*.pyc\" -exec rm '{}' \;"
