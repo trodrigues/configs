@@ -1,5 +1,5 @@
 if [ "$uname" = "Darwin" ] ; then
-    export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
@@ -10,8 +10,6 @@ if [ "$uname" = "Darwin" ] ; then
 
     # increase the number of processes per uid
     ulimit -u 400
-
-    source $CODEHOME/scripts/shell/playfish/scriptaliases.rc
 fi
 
 # manage webserver

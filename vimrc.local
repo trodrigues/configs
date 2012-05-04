@@ -1,10 +1,14 @@
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set nowrap
-set wildignore+=target,trunk
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set wrap
+set wildignore+=target,build,*.png,*.jpg,*.gif,*.jar,*.zip,node_modules
+
+set list listchars=tab:\ \ ,
 
 au BufNewFile,BufRead Jakefile set filetype=javascript
+
+map <Leader>m :!open http://daringfireball.net/projects/markdown/syntax<CR>
 
 "change split windows forward/backward
 nnoremap <F5> <C-W>w
@@ -55,5 +59,6 @@ set statusline+=%=                           " right align
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-10.(%l,%c%V%)\ %<%P        " offset
 
-nnoremap <F3> :!/Users/trodrigues/Dropbox/code/scripts/shell/run_vim_shell_commands.sh<CR>
+"nnoremap <F3> :!/Users/trodrigues/Dropbox/code/scripts/shell/run_vim_shell_commands.sh<CR>
+nnoremap <F3> :!make test<CR>
 nnoremap <F2> :G

@@ -12,5 +12,5 @@
     mg = merge
     spush = svn dcommit
     spull = svn rebase
-    lg = log --color
+    lg = log --color --graph
     di = diff --color
