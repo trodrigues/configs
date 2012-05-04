@@ -12,6 +12,18 @@ if [ "$uname" = "Darwin" ] ; then
     ulimit -u 400
 fi
 
+function start {
+  find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl load {} \;
+}
+
+function stop {
+  find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl unload {} \;
+}
+
+function restart {
+  stop $1 && start $1
+}
+
 # manage webserver
 start_nginx(){
     sudo launchctl load /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.nginx.plist
