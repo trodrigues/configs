@@ -39,3 +39,7 @@ function lag() {
   ag --color "$@" | less -r
 }
 
+# for sublimerge
+function subldiff(){
+  git show $1:$2|subl
+}
