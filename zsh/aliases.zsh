@@ -31,3 +31,6 @@ alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusio
 alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
 alias nave="$CODEHOME/github/nave/nave.sh"
 alias reinstall_janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
+
+alias sync_sublime_session="$HOME/Dropbox/configs/sublimetext2/sync_sublime_session.sh"
+alias set_sublime_session="$HOME/Dropbox/configs/sublimetext2/set_sublime_session.sh"

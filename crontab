@@ -1,0 +1,5 @@
+@daily $HOME/Code/scripts/shell/pinboard_backup.sh
+0 2 * * * /usr/local/bin/transmission-remote -tall --start
+#0 17 * * 1,2,3,4,5 /usr/local/bin/transmission-remote -tall --stop
+#0 10 * * 6,7 /usr/local/bin/transmission-remote -tall --stop
+* * * * * /usr/local/bin/flexget --cron

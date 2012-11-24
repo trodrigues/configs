@@ -1,0 +1,21 @@
+{
+	"auto_upgrade_last_run": 1353083597,
+	"installed_packages":
+	[
+		"Autocomplete Javascript with Method Signature",
+		"ColorPicker",
+		"DetectSyntax",
+		"Git",
+		"JsFormat",
+		"Package Control",
+		"Pretty JSON",
+		"sublime-github",
+		"SublimeBlockCursor",
+		"SublimeExternalCommand",
+		"SublimeLinter",
+		"Sublimerge",
+		"Tag",
+		"VintageEx",
+		"ZenCoding"
+	]
+}

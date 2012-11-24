@@ -14,3 +14,4 @@
     spull = svn rebase
     lg = log --color --graph
     di = diff --color
+    standup = log --since yesterday --oneline --author \"Tiago Rodrigues\"

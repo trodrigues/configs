@@ -4,55 +4,39 @@ if [ "$uname" = "Darwin" ] ; then
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
-    export CC="/Developer/usr/bin/gcc"
-    export CXX="/Developer/usr/bin/g++"
-    export LD="/Developer/usr/bin/gcc"
-
     # increase the number of processes per uid
     ulimit -u 400
 fi
 
 function start {
+  find ~/Library/LaunchAgents/ -name "*$1*"
   find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl load {} \;
 }
 
 function stop {
+  find ~/Library/LaunchAgents/ -name "*$1*"
   find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl unload {} \;
 }
+
+alias start_nginx="/usr/local/bin/nginx_ctl"
+alias stop_nginx="/usr/local/bin/nginx_ctl -s stop"
+alias quit_nginx="/usr/local/bin/nginx_ctl -s quit"
+alias reopen_nginx="/usr/local/bin/nginx_ctl -s reopen"
+alias reload_nginx="/usr/local/bin/nginx_ctl -s reload"
 
 function restart {
   stop $1 && start $1
 }
 
-# manage webserver
-start_nginx(){
-    sudo launchctl load /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.nginx.plist
+sshuttle(){
+  cwd=`pwd`
+  cd $HOME/Dropbox/code/github/sshuttle
+  ./sshuttle -r trodrigues@178.79.152.100:22522 0/0 -vv
+  cd $cwd
 }
 
-stop_nginx(){
-    sudo launchctl unload /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.nginx.plist
+function lag() {
+  ag --color "$@" | less -r
 }
 
-start_phpfcgi(){
-    sudo launchctl load /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.php-fastcgi.plist
-}
-
-stop_phpfcgi(){
-    sudo launchctl unload /Users/trodrigues/Library/LaunchDaemons/com.trodrigues.php-fastcgi.plist
-}
-
-start_mysql(){
-    sudo /opt/local/lib/mysql5/bin/mysqld_safe &
-}
-
-reload_webserver(){
-    stop_nginx
-    stop_phpfcgi
-    sleep 2
-    start_nginx
-    start_phpfcgi
-    ps aux|grep nginx
-    ps aux|grep php
-}
-
-
+alias top10_minecraft="ssh -f -N -L 25565:localhost:25565 tiago@dev.top10.com"
