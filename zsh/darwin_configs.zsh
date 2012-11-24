@@ -39,4 +39,3 @@ function lag() {
   ag --color "$@" | less -r
 }
 
-alias top10_minecraft="ssh -f -N -L 25565:localhost:25565 tiago@dev.top10.com"
