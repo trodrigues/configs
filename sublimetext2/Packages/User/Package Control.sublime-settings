@@ -1,21 +1,28 @@
 {
-	"auto_upgrade_last_run": 1353083597,
+	"auto_upgrade_last_run": null,
 	"installed_packages":
 	[
-		"Autocomplete Javascript with Method Signature",
+		"CoffeeScript",
 		"ColorPicker",
 		"DetectSyntax",
+		"Emmet",
 		"Git",
+		"Grunt",
+		"HTML Mustache",
+		"JS Validation using Esprima",
 		"JsFormat",
+		"LESS",
 		"Package Control",
 		"Pretty JSON",
+		"Sass",
+		"Slate",
 		"sublime-github",
 		"SublimeBlockCursor",
 		"SublimeExternalCommand",
-		"SublimeLinter",
 		"Sublimerge",
 		"Tag",
+		"TernJS",
 		"VintageEx",
-		"ZenCoding"
+		"Web Inspector"
 	]
 }

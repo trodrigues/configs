@@ -1,11 +1,16 @@
 if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
+    export PATH="$PATH:/Users/trodrigues/android-sdk-macosx/tools:/Users/trodrigues/android-sdk-macosx/platform-tools"
+    export PATH="$PATH:$HOME/.rbenv/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
     # increase the number of processes per uid
     ulimit -u 400
+    ulimit -n 6000
+
+    eval "$(rbenv init -)"
 fi
 
 function start {
@@ -30,7 +35,7 @@ function restart {
 
 sshuttle(){
   cwd=`pwd`
-  cd $HOME/Dropbox/code/github/sshuttle
+  cd $HOME/code/github/sshuttle
   ./sshuttle -r trodrigues@178.79.152.100:22522 0/0 -vv
   cd $cwd
 }

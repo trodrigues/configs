@@ -3,6 +3,7 @@
 	"font_size": 13,
 	"ignored_packages":
 	[
+		"TernJS"
 	],
 	"save_on_focus_lost": true,
 	"tab_size": 2,

@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdjustWindowForFontSizeChange</key>
+	<true/>
+	<key>AllowClipboardAccess</key>
+	<false/>
 	<key>AnimateDimming</key>
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
@@ -407,11 +411,13 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Dropbox/configs</string>
+	<string>~/Documents</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
 	<string></string>
+	<key>NSScrollAnimationEnabled</key>
+	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
 		<data>
@@ -430,13 +436,13 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>1403 283 924 485 1366 -432 1920 1200 </string>
+	<string>16 261 924 485 0 0 1366 746 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>448 487 384 129 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>7 8 650 476 0 0 1366 746 </string>
+	<string>251 270 1114 476 0 0 1366 746 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 26 1366 720 0 0 1366 746 </string>
+	<string>1442 2 650 476 1366 -312 1920 1080 </string>
 	<key>NeverWarnAboutShortLivedSessions_DD1B6308-EE2E-4B59-B796-13716040A38C</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1135,14 +1141,7 @@
 			<key>Transparency</key>
 			<real>0.073316141963005066</real>
 			<key>Triggers</key>
-			<array>
-				<dict>
-					<key>action</key>
-					<string>BounceTrigger</string>
-					<key>regex</key>
-					<string>Act: (\s|,)*2(\s|,|\])*</string>
-				</dict>
-			</array>
+			<array/>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -2644,6 +2643,8 @@
 	<integer>8</integer>
 	<key>RightOption</key>
 	<integer>3</integer>
+	<key>SUAutomaticallyUpdate</key>
+	<false/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
@@ -2651,7 +2652,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2012-10-12T13:47:09Z</date>
+	<date>2013-06-23T15:41:57Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -2705,6 +2706,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20120203</string>
+	<string>1.0.0.20130319</string>
 </dict>
 </plist>

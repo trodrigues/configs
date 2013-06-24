@@ -1,0 +1,10 @@
+[{
+  "caption": "Tools",
+  "mnemonic": "t",
+  "id": "tools",
+  "children": [{
+    "id": "jsvalidate",
+    "caption": "Js Validate",
+    "command": "jsvalidate"
+  }]
+}]

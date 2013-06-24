@@ -1,9 +1,6 @@
 [user]
-	name = Tiago Miguel Cavaco Rodrigues
+	name = Tiago Rodrigues
 	email = tmcrodrigues@gmail.com
-[gui]
-	fontui = -family \"bitstream vera sans\" -size 9 -weight bold -slant roman -underline 0 -overstrike 0
-	fontdiff = -family \"bitstream vera sans mono\" -size 10 -weight normal -slant roman -underline 0 -overstrike 0
 [alias]
     ci = commit
     co = checkout
@@ -12,6 +9,27 @@
     mg = merge
     spush = svn dcommit
     spull = svn rebase
-    lg = log --color --graph
+    purr = pull --rebase
+    lg = log --color
     di = diff --color
-    standup = log --since yesterday --oneline --author \"Tiago Rodrigues\"
+    dito = difftool
+    standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
+[difftool "Kaleidoscope"]
+[difftool]
+[diff]
+[core]
+	excludesfile = /Users/trodrigues/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Users/trodrigues/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[difftool "Kaleidoscope"]
+	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+[difftool]
+	prompt = false
+[diff]
+	tool = Kaleidoscope
+[color]
+	ui = true

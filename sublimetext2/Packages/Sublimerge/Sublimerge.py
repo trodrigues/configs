@@ -28,6 +28,9 @@ import sublime_plugin
 import difflib
 import re
 import os
+import subprocess
+import threading
+from xml.dom import minidom
 
 diffView = None
 
@@ -48,7 +51,15 @@ class SublimergeSettings():
         'diff_region_change_scope': 'markup.changed',
         'selected_diff_region_scope': 'selection',
         'selected_diff_region_gutter_icon': 'bookmark',
-        'ignore_whitespace': False
+        'ignore_whitespace': False,
+        'ignore_crlf': True,
+        'vcs_support': True,
+        'git_executable_path': 'git',
+        'git_log_args': '',
+        'git_show_args': '',
+        'svn_executable_path': 'svn',
+        'svn_log_args': '',
+        'svn_cat_args': ''
     }
 
     def load(self):
@@ -63,76 +74,136 @@ S.load()
 settings.add_on_change('reload', lambda: S.load())
 
 
+def lookForVcs(path):
+    if not S.get('vcs_support'):
+        return False
+
+    if os.path.isdir(path + '/.svn'):
+        return 'svn'
+    elif os.path.exists(path + '/.git'):
+        return 'git'
+    else:
+        sp = os.path.split(path)
+        if sp[0] != path and sp[0] != '':
+            return lookForVcs(sp[0])
+
+
+def executeShellCmd(exe, cwd):
+    print ("Cmd: %s" % (exe))
+    print ("Dir: %s" % (cwd))
+
+    p = subprocess.Popen(exe, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=cwd, shell=True)
+
+    for line in p.stdout.readlines():
+        line = str(line)
+        line = re.sub('(^\s+$)|(\s+$)', '', line)
+
+        if line != '':
+            yield line
+
+
 class SublimergeDiffer():
-    def difference(self, text1, text2):
-        data = []
-        lines = list(difflib.Differ().compare(text1.splitlines(1), text2.splitlines(1)))
 
-        for i in range(len(lines)):
-            line = lines[i]
-            lastIdx = len(data) - 1
-            change = line[0]
-            line = line[2:len(line)]
+    def process(self, line0, line1, line2):
+        if line0 == None:
+            return
 
-            part = None
+        change = line0[0]
+        line0 = line0[2:len(line0)]
 
-            if change == '+':
-                part = {'+': line, '-': '', 'change': '+', 'intraline': '', 'intralines': {'+': [], '-': []}}
+        part = None
 
-            elif change == '-':
-                part = {'-': line, '+': '', 'change': '-', 'intraline': '', 'intralines': {'+': [], '-': []}}
+        if change == '+':
+            part = {'+': line0, '-': '', 'change': '+', 'intraline': '', 'intralines': {'+': [], '-': []}}
 
-            elif change == ' ':
-                part = line
+        elif change == '-':
+            part = {'-': line0, '+': '', 'change': '-', 'intraline': '', 'intralines': {'+': [], '-': []}}
 
-            elif change == '?':
-                continue
+        elif change == ' ':
+            part = line0
 
-            if isinstance(part, str) and isinstance(data[lastIdx], str):
-                data[lastIdx] += part
-            else:
-                if isinstance(part, dict):
-                    if i < len(lines) - 1 and lines[i + 1][0] == '?':
-                        part['intraline'] = change
+        elif change == '?':
+            return
 
-                    if lastIdx >= 0:
-                        last = data[lastIdx]
-                    else:
-                        last = None
+        if isinstance(part, str) and (self.lastIdx in self.data) and isinstance(self.data[self.lastIdx], str):
+            self.data[self.lastIdx] += part
+        else:
+            if isinstance(part, dict):
+                if line1 and line1[0] == '?':
+                    part['intraline'] = change
 
-                    if isinstance(last, dict):
-                        skip = False
-
-                        im_p = last['intraline'] == '-' and part['change'] == '+'
-                        im_ip = last['intraline'] == '-' and part['intraline'] == '+'
-                        m_ip = last['change'] == '-' and part['intraline'] == '+'
-
-                        if im_p or im_ip or m_ip:
-                            data[lastIdx]['+'] += part['+']
-                            data[lastIdx]['-'] += part['-']
-                            data[lastIdx]['intraline'] = '!'
-                            skip = True
-                        elif part['intraline'] == '' and last['intraline'] == '':
-                            nextIntraline = None
-                            if i < len(lines) - 2 and lines[i + 2][0] == '?':
-                                nextIntraline = lines[i + 1][0]
-
-                            if nextIntraline == '+' and part['change'] == '-':
-                                data.append(part)
-                                skip = True
-                            else:
-                                data[lastIdx]['+'] += part['+']
-                                data[lastIdx]['-'] += part['-']
-                                skip = True
-
-                        if not skip:
-                            data.append(part)
-                    else:
-                        data.append(part)
+                if self.lastIdx >= 0:
+                    last = self.data[self.lastIdx]
                 else:
-                    data.append(part)
+                    last = None
 
-        return data
+                if isinstance(last, dict):
+                    skip = False
+
+                    im_p = last['intraline'] == '-' and part['change'] == '+'
+                    im_ip = last['intraline'] == '-' and part['intraline'] == '+'
+                    m_ip = last['change'] == '-' and part['intraline'] == '+'
+
+                    if im_p or im_ip or m_ip:
+                        self.data[self.lastIdx]['+'] += part['+']
+                        self.data[self.lastIdx]['-'] += part['-']
+                        self.data[self.lastIdx]['intraline'] = '!'
+                        skip = True
+                    elif part['intraline'] == '' and last['intraline'] == '':
+                        nextIntraline = None
+                        if line2 and line2[0] == '?':
+                            nextIntraline = line1[0]
+
+                        if nextIntraline == '+' and part['change'] == '-':
+                            self.data.append(part)
+                            self.lastIdx += 1
+                            skip = True
+                        else:
+                            self.data[self.lastIdx]['+'] += part['+']
+                            self.data[self.lastIdx]['-'] += part['-']
+                            skip = True
+
+                    if not skip:
+                        self.data.append(part)
+                        self.lastIdx += 1
+                else:
+                    self.data.append(part)
+                    self.lastIdx += 1
+            else:
+                self.data.append(part)
+                self.lastIdx += 1
+
+    def difference(self, text1, text2):
+        self.data = []
+        self.lastIdx = -1
+        gen = difflib.Differ().compare(text1.splitlines(1), text2.splitlines(1))
+
+        line0 = None
+        line1 = None
+        line2 = None
+
+        try:
+            line0 = gen.next()
+            line1 = gen.next()
+        except:
+            pass
+
+        inFor = False
+
+        for line2 in gen:
+            self.process(line0, line1, line2)
+            line0 = line1
+            line1 = line2
+            inFor = True
+
+        self.process(line0, line1, None)
+
+        if not inFor:
+            self.process(line1, line2, None)
+
+        self.process(line2, None, None)
+
+        return self.data
 
 
 class SublimergeScrollSync():
@@ -207,11 +278,16 @@ class SublimergeView():
     lastRightPos = None
     diff = None
     createdPositions = False
+    lastSel = {'regionLeft': None, 'regionRight': None}
+    leftEnabled = True
+    rightEnabled = True
 
-    def __init__(self, window, left, right, diff):
+    def __init__(self, window, left, right, diff, leftTmp=False, rightTmp=False):
         window.run_command('new_window')
         self.window = sublime.active_window()
         self.diff = diff
+        self.leftTmp = leftTmp
+        self.rightTmp = rightTmp
 
         if (S.get('hide_side_bar')):
             self.window.run_command('toggle_side_bar')
@@ -222,13 +298,35 @@ class SublimergeView():
             "cells": [[0, 0, 1, 1], [1, 0, 2, 1]]
         })
 
-        self.left = self.window.open_file(left.file_name())
-        self.right = self.window.open_file(right.file_name())
+        if not isinstance(left, sublime.View):
+            self.left = self.window.open_file(left)
+            self.leftEnabled = False
+        else:
+            self.left = self.window.open_file(left.file_name())
 
-        self.left.set_syntax_file(left.settings().get('syntax'))
-        self.right.set_syntax_file(right.settings().get('syntax'))
+        if not isinstance(right, sublime.View):
+            self.right = self.window.open_file(right)
+            self.rightEnabled = False
+        else:
+            self.right = self.window.open_file(right.file_name())
+
+        if not self.rightEnabled and self.rightTmp:
+            self.right.set_syntax_file(self.left.settings().get('syntax'))
+
+        if not self.leftEnabled and self.leftTmp:
+            self.left.set_syntax_file(self.right.settings().get('syntax'))
+
         self.left.set_scratch(True)
         self.right.set_scratch(True)
+
+        self.clear()
+
+    def clear(self):
+        if self.rightTmp and os.path.exists(self.right.file_name()):
+            os.remove(self.right.file_name())
+
+        if self.leftTmp and os.path.exists(self.left.file_name()):
+            os.remove(self.left.file_name())
 
     def enlargeCorrespondingPart(self, part1, part2):
         linesPlus = part1.splitlines()
@@ -280,17 +378,22 @@ class SublimergeView():
                 right.insert(edit, right.size(), part)
                 right.end_edit(edit)
             else:
+                ignore = False
+
                 if S.get('ignore_whitespace'):
                     trimRe = '(^\s+)|(\s+$)'
                     if re.sub(trimRe, '', part['+']) == re.sub(trimRe, '', part['-']):
-                        edit = left.begin_edit()
-                        left.insert(edit, left.size(), part['-'])
-                        left.end_edit(edit)
+                        ignore = True
 
-                        edit = right.begin_edit()
-                        right.insert(edit, right.size(), part['+'])
-                        right.end_edit(edit)
-                        continue
+                if ignore:
+                    edit = left.begin_edit()
+                    left.insert(edit, left.size(), part['-'])
+                    left.end_edit(edit)
+
+                    edit = right.begin_edit()
+                    right.insert(edit, right.size(), part['+'])
+                    right.end_edit(edit)
+                    continue
 
                 pair = {
                     'regionLeft': None,
@@ -328,7 +431,10 @@ class SublimergeView():
                                 if sign == '^':
                                     sign = lastChange
 
-                                part['intralines'][sign].append([begins[sign] - lastLen + m.start(), begins[sign] - lastLen + m.end()])
+                                start = begins[sign] - lastLen + m.start()
+                                end = begins[sign] - lastLen + m.end()
+
+                                part['intralines'][sign].append([start, end])
 
                 enlarged = self.enlargeCorrespondingPart(part['+'], part['-'])
 
@@ -406,13 +512,46 @@ class SublimergeView():
             if not S.get('ignore_whitespace'):  # @todo: temporary fix for loosing view sync while ignore_whitespace is true
                 self.right.show_at_center(sublime.Region(self.currentRegion['regionRight'].begin(), self.currentRegion['regionRight'].begin()))
 
+    def selectDiffUnderSelection(self, selection, side):
+        if self.createdPositions:
+            if selection[0].begin() == 0 and selection[0].end() == 0:  # this fixes strange behavior with regions
+                return
+
+            for i in range(len(self.regions)):
+                if self.regions[i][side].contains(selection[0]):
+                    self.selectDiff(i)
+                    break
+
+    def checkForClick(self, view):
+        side = None
+
+        if view.id() == self.left.id():
+            side = 'regionLeft'
+        elif view.id() == self.right.id():
+            side = 'regionRight'
+
+        if side != None:
+            sel = [r for r in view.sel()]
+
+            if self.lastSel[side]:
+                if sel == self.lastSel[side]:  # previous selection equals current so it means this was a mouse click!
+                    self.selectDiffUnderSelection(view.sel(), side)
+
+            self.lastSel[side] = sel
+
     def goUp(self):
         self.selectDiff(self.currentDiff - 1)
 
     def goDown(self):
         self.selectDiff(self.currentDiff + 1)
 
+    def mergeDisabled(self, direction):
+        return (not self.rightEnabled and direction == '>>') or (not self.leftEnabled and direction == '<<')
+
     def merge(self, direction, mergeAll):
+        if self.mergeDisabled(direction):
+            return
+
         if mergeAll:
             while len(self.regions) > 0:
                 self.merge(direction, False)
@@ -517,94 +656,332 @@ class SublimergeView():
         view.set_read_only(True)
 
 
-class SublimergeDiffThread():
-    def __init__(self, window, left, right):
+class ThreadProgress():
+    def __init__(self, thread, message):
+        self.th = thread
+        self.msg = message
+        self.add = 1
+        self.size = 8
+        self.speed = 100
+        sublime.set_timeout(lambda: self.run(0), self.speed)
+
+    def run(self, i):
+        if not self.th.is_alive():
+            if hasattr(self.th, 'result') and not self.th.result:
+                sublime.status_message('')
+            return
+
+        before = i % self.size
+        after = (self.size - 1) - before
+
+        sublime.status_message('%s [%s=%s]' % (self.msg, ' ' * before, ' ' * after))
+
+        if not after:
+            self.add = -1
+        if not before:
+            self.add = 1
+
+        i += self.add
+
+        sublime.set_timeout(lambda: self.run(i), self.speed)
+
+
+class SublimergeDiffThread(threading.Thread):
+    def __init__(self, window, left, right, leftTmp=False, rightTmp=False):
         self.window = window
         self.left = left
         self.right = right
-        sublime.set_timeout(self.run, 0)
+        self.leftTmp = leftTmp
+        self.rightTmp = rightTmp
+
+        #self.text1 = self.left.substr(sublime.Region(0, self.left.size()))
+
+        if not isinstance(self.left, sublime.View):
+            self.text1 = open(self.left, 'rb').read().decode('utf-8', 'replace')
+        else:
+            self.text1 = self.left.substr(sublime.Region(0, self.left.size()))
+            if self.left.is_dirty():
+                self.leftTmp = True
+
+        if not isinstance(self.right, sublime.View):
+            self.text2 = open(self.right, 'rb').read().decode('utf-8', 'replace')
+        else:
+            self.text2 = self.right.substr(sublime.Region(0, self.right.size()))
+            if self.right.is_dirty():
+                self.rightTmp = True
+
+        threading.Thread.__init__(self)
 
     def run(self):
-        global diffView
-        text1 = self.left.substr(sublime.Region(0, self.left.size()))
-        text2 = self.right.substr(sublime.Region(0, self.right.size()))
+        ThreadProgress(self, 'Computing differences')
 
-        diff = SublimergeDiffer().difference(text1, text2)
+        global diffView
 
         differs = False
 
+        if S.get('ignore_crlf'):
+            self.text1 = re.sub('\r\n', '\n', self.text1)
+            self.text2 = re.sub('\r\n', '\n', self.text2)
+
+            self.text1 = re.sub('\r', '\n', self.text1)
+            self.text2 = re.sub('\r', '\n', self.text2)
+
         if S.get('ignore_whitespace'):
             regexp = re.compile('(^\s+)|(\s+$)', re.MULTILINE)
-            if re.sub(regexp, '', text1) != re.sub(regexp, '', text2):
+            if re.sub(regexp, '', self.text1) != re.sub(regexp, '', self.text2):
                 differs = True
-        elif text1 != text2:
+        elif self.text1 != self.text2:
             differs = True
 
         if not differs:
-            sublime.message_dialog('There is no difference between files')
+            sublime.error_message('There is no difference between files')
+            if self.leftTmp and not isinstance(self.left, sublime.View):
+                os.remove(self.left)
+            if self.rightTmp and not isinstance(self.right, sublime.View):
+                os.remove(self.right)
             return
 
-        diffView = SublimergeView(self.window, self.left, self.right, diff)
-        self.left.erase_status('sublimerge-computing-diff')
+        diff = SublimergeDiffer().difference(self.text1, self.text2)
+
+        def inner():
+            global diffView
+            diffView = SublimergeView(self.window, self.left, self.right, diff, self.leftTmp, self.rightTmp)
+
+        sublime.set_timeout(inner, 100)
+
+
+class SublimergeHistoryThread(threading.Thread):
+    def __init__(self, filename, vcs, sublimerge):
+        self.filename = filename
+        self.sublimerge = sublimerge
+        self.vcs = vcs
+        threading.Thread.__init__(self)
+
+    def run(self):
+        ThreadProgress(self, 'Fetching commits history')
+        if self.vcs == 'git':
+            self.fetchFromGit()
+        elif self.vcs == 'svn':
+            self.fetchFromSvn()
+
+    def fetchFromSvn(self):
+        sp = os.path.split(self.filename)
+        cmd = '%s log "%s" --xml %s' % (S.get('svn_executable_path'), sp[1], S.get('svn_log_args'))
+        xml = ''
+
+        for line in executeShellCmd(cmd, sp[0]):
+            xml += line
+
+        if xml != '' and re.match('^<\?xml', xml):
+            try:
+                dom = minidom.parseString(xml)
+                commitStack = []
+                for entry in dom.getElementsByTagName('logentry'):
+                    author = entry.getElementsByTagName('author')[0].childNodes[0].nodeValue
+                    date = entry.getElementsByTagName('date')[0].childNodes[0].nodeValue
+                    msgs = entry.getElementsByTagName('msg')
+
+                    if len(msgs) > 0 and len(msgs[0].childNodes) > 0:
+                        msg = msgs[0].childNodes[0].nodeValue.splitlines()
+                    else:
+                        msg = []
+
+                    commitStack.append({'commit': entry.getAttribute('revision'), 'author': author, 'date': date, 'msg': msg})
+
+                self.displayQuickPanel(commitStack, self.sublimerge.onListSelectSvn)
+            except:
+                sublime.error_message('Unable to parse XML')
+
+        elif xml != '':
+            sublime.error_message(xml.decode('utf-8', 'replace'))
+
+        else:
+            sublime.error_message('Empty svn log output')
+
+    def fetchFromGit(self):
+        commitStack = []
+        outputStack = []
+
+        def addCommitStack(line):
+            match = re.match('^commit\s+([a-zA-Z0-9]+)$', line)
+
+            if match:
+                commitStack.append({'commit': match.group(1), 'date': '', 'author': '', 'msg': []})
+            elif len(commitStack) > 0:
+                match = re.match('^Author:\s+(.+)$', line)
+                if match:
+                    commitStack[len(commitStack) - 1]['author'] = match.group(1).decode('utf-8', 'replace')
+                else:
+                    match = re.match('^Date:\s+(.+)$', line)
+                    if match:
+                        commitStack[len(commitStack) - 1]['date'] = match.group(1).decode('utf-8', 'replace')
+                    else:
+                        commitStack[len(commitStack) - 1]['msg'].append(line.decode('utf-8', 'replace'))
+            else:
+                outputStack.append(line.decode('utf-8', 'replace'))
+
+        sp = os.path.split(self.filename)
+
+        cmd = '%s log %s -- "%s"' % (S.get('git_executable_path'), S.get('git_log_args'), sp[1])
+
+        for line in executeShellCmd(cmd, sp[0]):
+            addCommitStack(line)
+
+        if len(outputStack) > 0:
+            sublime.error_message("\n".join(outputStack))
+            return
+
+        self.displayQuickPanel(commitStack, self.sublimerge.onListSelectGit)
+
+    def displayQuickPanel(self, commitStack, callback):
+        def inner():
+            self.sublimerge.displayQuickPanel(commitStack, callback)
+
+        if len(commitStack) == 0:
+            sublime.error_message("No history for file\n%s\nIs it versioned?" % (self.filename))
+        else:
+            sublime.set_timeout(inner, 100)
 
 
 class SublimergeCommand(sublime_plugin.WindowCommand):
-    viewsList = []
     viewsPaths = []
-    diffIndex = 0
+    viewsList = []
+    itemsList = []
+    commits = []
+    window = None
+    view = None
 
-    def run(self):
+    def is_enabled(self):
+        view = sublime.active_window().active_view();
+        if diffView and  diffView.left and diffView.right and view and (view.id() == diffView.left.id() or view.id() == diffView.right.id()):
+            return False
+
+        return True
+
+    def getComparableFiles(self):
         self.viewsList = []
         self.viewsPaths = []
-        self.diffIndex = 0
         active = self.window.active_view()
 
-        if self.saved(active):
-            allViews = self.window.views()
-            ratios = []
-            if S.get('intelligent_files_sort'):
-                original = os.path.split(active.file_name())
+        allViews = self.window.views()
+        ratios = []
+        if S.get('intelligent_files_sort'):
+            original = os.path.split(active.file_name())
 
-            for view in allViews:
-                if view.file_name() != None and view.file_name() != active.file_name() and (not S.get('same_syntax_only') or view.settings().get('syntax') == active.settings().get('syntax')):
-                    f = view.file_name()
+        for view in allViews:
+            if view.file_name() != None and view.file_name() != active.file_name() and (not S.get('same_syntax_only') or view.settings().get('syntax') == active.settings().get('syntax')):
+                f = view.file_name()
 
-                    ratio = 0
+                ratio = 0
 
-                    if S.get('intelligent_files_sort'):
-                        ratio = difflib.SequenceMatcher(None, original[1], os.path.split(f)[1]).ratio()
+                if S.get('intelligent_files_sort'):
+                    ratio = difflib.SequenceMatcher(None, original[1], os.path.split(f)[1]).ratio()
 
-                    ratios.append({'ratio': ratio, 'file': f, 'dirname': ''})
+                ratios.append({'ratio': ratio, 'file': f, 'dirname': ''})
 
-            ratiosLength = len(ratios)
+        ratiosLength = len(ratios)
 
-            if ratiosLength > 0:
-                ratios.sort(self.sortFiles)
+        if ratiosLength > 0:
+            ratios.sort(self.sortFiles)
 
-                if S.get('compact_files_list'):
-                    for i in range(ratiosLength):
-                        for j in range(ratiosLength):
-                            if i != j:
-                                sp1 = os.path.split(ratios[i]['file'])
-                                sp2 = os.path.split(ratios[j]['file'])
+            if S.get('compact_files_list'):
+                for i in range(ratiosLength):
+                    for j in range(ratiosLength):
+                        if i != j:
+                            sp1 = os.path.split(ratios[i]['file'])
+                            sp2 = os.path.split(ratios[j]['file'])
 
-                                if sp1[1] == sp2[1]:
-                                    ratios[i]['dirname'] = self.getFirstDifferentDir(sp1[0], sp2[0])
-                                    ratios[j]['dirname'] = self.getFirstDifferentDir(sp2[0], sp1[0])
+                            if sp1[1] == sp2[1]:
+                                ratios[i]['dirname'] = self.getFirstDifferentDir(sp1[0], sp2[0])
+                                ratios[j]['dirname'] = self.getFirstDifferentDir(sp2[0], sp1[0])
 
-                for f in ratios:
-                    self.viewsPaths.append(f['file'])
-                    self.viewsList.append(self.prepareListItem(f['file'], f['dirname']))
+            for f in ratios:
+                self.viewsPaths.append(f['file'])
+                self.viewsList.append(self.prepareListItem(f['file'], f['dirname']))
 
-                self.window.show_quick_panel(self.viewsList, self.onListSelect)
-            else:
-                if S.get('same_syntax_only'):
-                    syntax = re.match('(.+)\.tmLanguage$', os.path.split(active.settings().get('syntax'))[1])
-                    if syntax != None:
-                        sublime.message_dialog('There are no other open ' + syntax.group(1) + ' files to compare')
-                        return
+            sublime.set_timeout(lambda: self.window.show_quick_panel(self.viewsList, self.onListSelect), 0) #timeout for ST3
+        else:
+            if S.get('same_syntax_only'):
+                syntax = re.match('(.+)\.tmLanguage$', os.path.split(active.settings().get('syntax'))[1])
+                if syntax != None:
+                    sublime.error_message('There are no other open ' + syntax.group(1) + ' files to compare')
+                    return
 
-                sublime.message_dialog('There are no other open files to compare')
+            sublime.error_message('There are no other open files to compare')
+
+    def run(self):
+        self.window = sublime.active_window()
+        self.active = self.window.active_view()
+
+        if not self.active or self.active.file_name() is None:
+            return
+
+        sp = os.path.split(self.active.file_name())
+        vcs = lookForVcs(sp[0])
+
+        def onMenuSelect(index):
+            if index == 0:
+                self.getComparableFiles()
+            elif index == 1:
+                th = SublimergeHistoryThread(self.active.file_name(), vcs, self)
+                th.start()
+
+        items = ['Compare to other file...']
+
+        if vcs:
+            items.append('Compare to revision...')
+
+        if len(items) > 1 or vcs:
+            sublime.set_timeout(lambda: self.window.show_quick_panel(items, onMenuSelect), 0)
+        else:
+            self.getComparableFiles()
+
+    def onListSelectGit(self, index):
+        sp = os.path.split(self.active.file_name())
+
+        if index >= 0:
+            outfile = '%s/%s@%s' % (sp[0], sp[1], self.commits[index][0:10])
+            cmd = '%s show %s %s:"./%s" > "%s"' % (S.get('git_executable_path'), S.get('git_show_args'), self.commits[index], sp[1], outfile)
+
+            for line in executeShellCmd(cmd, sp[0]):
+                pass
+                #print line
+
+            th = SublimergeDiffThread(self.window, self.active, outfile, rightTmp=True)
+            th.start()
+
+        return False
+
+    def onListSelectSvn(self, index):
+        if index >= 0:
+            sp = os.path.split(self.active.file_name())
+
+            outfile = '%s/%s@%s' % (sp[0], sp[1], self.commits[index])
+
+            cmd = '%s cat "%s"@%s %s > "%s"' % (S.get('svn_executable_path'), sp[1], self.commits[index], S.get('svn_cat_args'), outfile)
+
+            for line in executeShellCmd(cmd, sp[0]):
+                pass
+                #print line
+
+            th = SublimergeDiffThread(self.window, self.active, outfile, rightTmp=True)
+            th.start()
+
+    def displayQuickPanel(self, commitStack, callback):
+        sublime.status_message('')
+
+        self.itemsList = []
+        self.commits = []
+        for item in commitStack:
+            self.commits.append(item['commit'])
+            itm = [item['commit'][0:10] + ' @ ' + item['date'], item['author']]
+            if len(item['msg']) > 0:
+                line = re.sub('(^\s+)|(\s+$)', '', item['msg'][0])
+                itm.append(line)
+
+            self.itemsList.append(itm)
+
+        self.window.show_quick_panel(self.itemsList, callback)
 
     def prepareListItem(self, name, dirname):
         if S.get('compact_files_list'):
@@ -644,13 +1021,6 @@ class SublimergeCommand(sublime_plugin.WindowCommand):
         if d > 0:
             return 1
 
-    def saved(self, view):
-        if view.is_dirty():
-            sublime.error_message('File `' + view.file_name() + '` must be saved in order to compare')
-            return False
-
-        return True
-
     def onListSelect(self, itemIndex):
         if itemIndex > -1:
             allViews = self.window.views()
@@ -663,10 +1033,8 @@ class SublimergeCommand(sublime_plugin.WindowCommand):
             if compareTo != None:
                 global diffView
 
-                if self.saved(compareTo):
-                    active = self.window.active_view()
-                    active.set_status('sublimerge-computing-diff', 'Computing differences...')
-                    SublimergeDiffThread(self.window, active, compareTo)
+                th = SublimergeDiffThread(self.window, self.window.active_view(), compareTo)
+                th.start()
 
 
 class SublimergeGoUpCommand(sublime_plugin.WindowCommand):
@@ -674,11 +1042,31 @@ class SublimergeGoUpCommand(sublime_plugin.WindowCommand):
         if diffView != None:
             diffView.goUp()
 
+    def is_visible(self):
+        view = sublime.active_window().active_view();
+        if diffView and diffView.left and diffView.right and view and (view.id() == diffView.left.id() or view.id() == diffView.right.id()):
+            return True
+
+        return False
+
+    def is_enabled(self):
+        return self.is_visible() and len(diffView.regions) > 1 and diffView.currentDiff > 0
+
 
 class SublimergeGoDownCommand(sublime_plugin.WindowCommand):
     def run(self):
         if diffView != None:
             diffView.goDown()
+
+    def is_visible(self):
+        view = sublime.active_window().active_view();
+        if diffView and diffView.left and diffView.right and view and (view.id() == diffView.left.id() or view.id() == diffView.right.id()):
+            return True
+
+        return False
+
+    def is_enabled(self):
+        return self.is_visible() and diffView.currentDiff < len(diffView.regions) - 1
 
 
 class SublimergeMergeLeftCommand(sublime_plugin.WindowCommand):
@@ -686,11 +1074,57 @@ class SublimergeMergeLeftCommand(sublime_plugin.WindowCommand):
         if diffView != None:
             diffView.merge('<<', mergeAll)
 
+    def is_visible(self):
+        view = sublime.active_window().active_view();
+        if diffView and diffView.left and diffView.right and view and (view.id() == diffView.left.id() or view.id() == diffView.right.id()) and not diffView.mergeDisabled('<<'):
+            return True
+
+        return False
+
+    def is_enabled(self):
+        return self.is_visible() and len(diffView.regions) > 0
+
 
 class SublimergeMergeRightCommand(sublime_plugin.WindowCommand):
     def run(self, mergeAll=False):
         if diffView != None:
             diffView.merge('>>', mergeAll)
+
+    def is_visible(self):
+        view = sublime.active_window().active_view();
+        if diffView and diffView.left and diffView.right and view and (view.id() == diffView.left.id() or view.id() == diffView.right.id()) and not diffView.mergeDisabled('>>'):
+            return True
+
+        return False
+
+    def is_enabled(self):
+        return self.is_visible() and len(diffView.regions) > 0
+
+
+class SublimergeDiffSelectedFiles(sublime_plugin.WindowCommand):
+    def run(self, files):
+        allViews = self.window.views()
+        for view in allViews:
+            if view.file_name() == files[0]:
+                files[0] = view
+
+            if view.file_name() == files[1]:
+                files[1] = view
+
+        th = SublimergeDiffThread(self.window, files[0], files[1])
+        th.start()
+
+    def is_enabled(self, files):
+        return len(files) == 2
+
+
+class SublimergeFromSidebar(sublime_plugin.WindowCommand):
+    def is_enabled(self, files):
+        return len(files) == 1
+
+    def run(self, files):
+        sublime.active_window().open_file(files[0], sublime.TRANSIENT)
+        sublime.active_window().run_command('sublimerge')
 
 
 class SublimergeListener(sublime_plugin.EventListener):
@@ -702,11 +1136,11 @@ class SublimergeListener(sublime_plugin.EventListener):
 
         if diffView != None:
             if view.id() == diffView.left.id():
-                print "Left file: " + view.file_name()
+                #print "Left file: " + view.file_name()
                 self.left = view
 
             elif view.id() == diffView.right.id():
-                print "Right file: " + view.file_name()
+                #print "Right file: " + view.file_name()
                 self.right = view
 
             if self.left != None and self.right != None:
@@ -728,22 +1162,29 @@ class SublimergeListener(sublime_plugin.EventListener):
         global diffView
 
         if diffView and (view.id() == diffView.left.id() or view.id() == diffView.right.id()):
+            diffView.clear()
             wnd = view.window()
             if wnd:
-                wnd.run_command('close_window')
+                sublime.set_timeout(lambda: wnd.run_command('close_window'), 0)
 
     def on_close(self, view):
         global diffView
 
         if diffView != None:
             if view.id() == diffView.left.id():
+                diffView.clear()
                 wnd = diffView.right.window()
                 if wnd != None:
-                    wnd.run_command('close_window')
+                    sublime.set_timeout(lambda: wnd.run_command('close_window'), 0)
                 diffView = None
 
             elif view.id() == diffView.right.id():
+                diffView.clear()
                 wnd = diffView.left.window()
                 if wnd != None:
-                    wnd.run_command('close_window')
+                    sublime.set_timeout(lambda: wnd.run_command('close_window'), 0)
                 diffView = None
+
+    def on_selection_modified(self, view):
+        if diffView:
+            diffView.checkForClick(view)
