@@ -1,3 +1,0 @@
-set guifont=Menlo:h13
-nnoremap <esc> :noh<return><esc>
-map <Leader>P :Preview<CR>
