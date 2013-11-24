@@ -9,7 +9,6 @@
     mg = merge
     spush = svn dcommit
     spull = svn rebase
-    purr = pull --rebase
     lg = log --color
     di = diff --color
     dito = difftool
@@ -19,12 +18,6 @@
 [diff]
 [core]
 	excludesfile = /Users/trodrigues/.gitignore_global
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Users/trodrigues/Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [difftool "Kaleidoscope"]
 	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool]
@@ -33,3 +26,7 @@
 	tool = Kaleidoscope
 [color]
 	ui = true
+[branch]
+  autosetuprebase = always
+[push]
+	default = simple
