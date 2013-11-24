@@ -1,0 +1,32 @@
+[
+  {
+    "caption": "Sublimerge: View Diff",
+    "command": "sublimerge"
+  },
+  {
+    "caption": "Sublimerge: Go to previous difference",
+    "command": "sublimerge_go_up"
+  },
+  {
+    "caption": "Sublimerge: Go to next difference",
+    "command": "sublimerge_go_down"
+  },
+  {
+    "caption": "Sublimerge: Merge change from right to left",
+    "command": "sublimerge_merge_left"
+  },
+  {
+    "caption": "Sublimerge: Merge change from left to right",
+    "command": "sublimerge_merge_right"
+  },
+  {
+    "caption": "Sublimerge: Merge all from right to left",
+    "command": "sublimerge_merge_left",
+    "args": {"mergeAll": true}
+  },
+  {
+    "caption": "Sublimerge: Merge all from left to right",
+    "command": "sublimerge_merge_right",
+    "args": {"mergeAll": true}
+  }
+]

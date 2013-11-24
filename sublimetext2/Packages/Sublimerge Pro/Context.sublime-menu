@@ -1,0 +1,34 @@
+[
+	{ "caption": "-" },
+	{
+		"caption": "Sublimerge",
+		"children": [{
+			"caption": "Compare to...",
+			"command": "sublimerge"
+		}, {
+            "caption": "Go to previous difference",
+            "command": "sublimerge_go_up"
+        }, {
+            "caption": "Go to next difference",
+            "command": "sublimerge_go_down"
+        }, {
+            "caption": "-"
+        }, {
+            "caption": "Merge change from right to left",
+            "command": "sublimerge_merge_left"
+        }, {
+            "caption": "Merge change from left to right",
+            "command": "sublimerge_merge_right"
+        }, {
+            "caption": "-"
+        }, {
+            "caption": "Merge all from right to left",
+            "command": "sublimerge_merge_left",
+            "args": {"mergeAll": true}
+        }, {
+            "caption": "Merge all from left to right",
+            "command": "sublimerge_merge_right",
+            "args": {"mergeAll": true}
+        }]
+	}
+]
