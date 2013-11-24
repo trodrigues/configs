@@ -61,3 +61,16 @@ editsshconfig() {
     cp $CONFIGSHOME/sshconfig $HOME/.ssh/config
     echo "ssh config reloaded"
 }
+
+git-st-subdirs() {
+  for i in * ; do
+    if [ -d $i ] ; then
+      if [ -d $i/.git ] ; then
+        echo "---->" $i
+        cd $i
+        git st
+        cd ..
+      fi
+    fi
+  done
+}

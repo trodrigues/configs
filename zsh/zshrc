@@ -29,7 +29,7 @@ typeset -ga precmd_functions
 typeset -ga chpwd_functions
 
 uname=$(uname)
-export CODEHOME="$HOME/Dropbox/code"
+export CODEHOME="$HOME/code"
 export CONFIGSHOME="$HOME/Dropbox/configs"
 
 export EDITOR=/usr/bin/vi
@@ -56,3 +56,4 @@ load_zsh_config linux_configs
 load_zsh_config prompt
 
 load_zsh_config aliases
+load_zsh_config contentful

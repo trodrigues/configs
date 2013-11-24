@@ -1,8 +1,8 @@
 if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+    export PATH="$PATH:$HOME/.rbenv/bin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export PATH="$PATH:/Users/trodrigues/android-sdk-macosx/tools:/Users/trodrigues/android-sdk-macosx/platform-tools"
-    export PATH="$PATH:$HOME/.rbenv/bin"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
@@ -11,6 +11,10 @@ if [ "$uname" = "Darwin" ] ; then
     ulimit -n 6000
 
     eval "$(rbenv init -)"
+
+    if [ -f /usr/local/etc/cacert.pem ] ; then
+      export SSL_CERT_FILE=/usr/local/etc/cacert.pem
+    fi
 fi
 
 function start {
