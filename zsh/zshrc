@@ -49,6 +49,12 @@ load_zsh_config(){
 
 load_zsh_config zsh_helpers
 
+mkcfglink vim/vimrc.after .vimrc.after
+mkcfglink vim/vimrc.before .vimrc.before
+mkcfglink vim/dot_vim/janus/vim/vimrc .vimrc
+mkcfglink tmux.conf .tmux.conf
+mkcfglink tmuxinator .tmuxinator
+
 load_zsh_config visudo
 load_zsh_config darwin_configs
 load_zsh_config linux_configs

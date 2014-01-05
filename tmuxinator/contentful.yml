@@ -1,0 +1,33 @@
+# ~/.tmuxinator/contentful.yml
+
+name: contentful
+root: ~/contentful/lab/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - lab:
+      layout: even-horizontal
+      panes:
+        - foreman start
+        - sleep 20 && dictator
+  - user_interface:
+      layout: fc1f,169x37,0,0{84x37,0,0,0,84x37,85,0[84x25,85,0,2,84x6,85,26,3,84x4,85,33,4]}
+      panes:
+        - cd user_interface
+        - cd user_interface
+        - cd user_interface && sleep 1m && guard
+        - cd user_interface && sleep 1m && bundle exec rake jasmine JASMINE_PORT=8112

@@ -5,6 +5,12 @@ ZSH_CONFIG_FILE="$HOME/.zshrc"
 
 alias showzshrefcard="echo http://www.bash2zsh.com/zsh_refcard/refcard.pdf && echo https://github.com/robbyrussell/oh-my-zsh/tree/master/lib"
 
+mkcfglink() {
+  if [ ! -h $HOME/$2 ] ; then
+    ln -s $CONFIGSHOME/$1 $HOME/$2
+  fi
+}
+
 reloadzshrc() {
     if [ -f $SOURCE_ZSH_CONFIG_FILE ] ; then
         echo "reloading from Dropbox"
