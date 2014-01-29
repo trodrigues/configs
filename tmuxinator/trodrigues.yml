@@ -1,7 +1,7 @@
-# ~/.tmuxinator/contentful.yml
+# ~/.tmuxinator/trodrigues.yml
 
-name: contentful
-root: ~/contentful/lab/
+name: trodrigues
+root: ~/code/trodrigues.net
 
 # Optional tmux socket
 # socket_name: foo
@@ -19,19 +19,8 @@ root: ~/contentful/lab/
 # tmux_command: byobu
 
 windows:
-  - daemons:
+  - editor:
       layout: even-horizontal
       panes:
-        - foreman start
-        - sleep 10 && dictator
-  - user_interface:
-      layout: fc1f,169x37,0,0{84x37,0,0,0,84x37,85,0[84x25,85,0,2,84x6,85,26,3,84x4,85,33,4]}
-      panes:
-        - cd user_interface
-        - cd user_interface
-        - cd user_interface && sleep 20 && guard
-        - cd user_interface && sleep 20 && bundle exec rake jasmine JASMINE_PORT=8112
-  - client: cd client
-  - validation: cd validation
-  - lab: #
-  - contentful: cd ..
+        - #
+        - #
