@@ -22,5 +22,5 @@ windows:
   - editor:
       layout: even-horizontal
       panes:
-        - #
+        - harp server
         - #
