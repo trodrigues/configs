@@ -13,6 +13,7 @@
     di = diff --color
     dito = difftool
     standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
+    show-files = show --name-status
 [difftool "Kaleidoscope"]
 [difftool]
 [diff]
