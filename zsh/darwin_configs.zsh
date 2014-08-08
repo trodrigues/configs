@@ -6,6 +6,8 @@ if [ "$uname" = "Darwin" ] ; then
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
+    export VAGRANT_DEFAULT_PROVIDER="virtualbox"
+
     # increase the number of processes per uid
     ulimit -u 400
     ulimit -n 6000
@@ -32,6 +34,11 @@ alias stop_nginx="/usr/local/bin/nginx_ctl -s stop"
 alias quit_nginx="/usr/local/bin/nginx_ctl -s quit"
 alias reopen_nginx="/usr/local/bin/nginx_ctl -s reopen"
 alias reload_nginx="/usr/local/bin/nginx_ctl -s reload"
+
+function backup_iphoto_lib(){
+  rsync -avz ~/Pictures/iPhoto\ Library/ /Volumes/elements/iPhoto\ Library
+  rsync -avz ~/Pictures/iPhoto\ Library/ /Volumes/external/iPhoto\ Library
+}
 
 function restart {
   stop $1 && start $1

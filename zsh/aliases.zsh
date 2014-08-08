@@ -29,7 +29,6 @@ alias vmwarefusion_setports="sudo vim /Library/Application\ Support/VMware\ Fusi
 alias vmwarefusion_reloadports="sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart"
 
 alias jstd="$CODEHOME/scripts/shell/js_test_driver.sh"
-alias nave="$CODEHOME/github/nave/nave.sh"
 alias reinstall-janus="$CODEHOME/scripts/shell/reinstall_janus.sh"
 
 alias sync-sublime-session="$HOME/Dropbox/configs/sublimetext2/sync_sublime_session.sh"
