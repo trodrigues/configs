@@ -30,14 +30,22 @@ windows:
         - cd user_interface
         - cd user_interface && echo "vagrant ssh && jasstart"
   - user_interface: cd user_interface
-  - client: cd client
+  - client:
+      layout: 224a,208x54,0,0{104x54,0,0,3,103x54,105,0,16}
+      panes:
+        - cd client
+        - cd client && gitsh
   - marketing:
       layout: f032,208x53,0,0{104x53,0,0,6,103x53,105,0[103x36,105,0,13,103x16,105,37,14]}
       panes:
         - cd marketing
         - cd marketing && gitsh
         - #
-  - lab: #
+  - gatekeeper:
+      layout: a24a,208x54,0,0{104x54,0,0,6,103x54,105,0,14}
+      panes:
+        - cd gatekeeper
+        - cd gatekeeper && gitsh
   - contentful: cd ..
   - contentful: cd ..
   - contentful: cd ..
