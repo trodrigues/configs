@@ -1,12 +1,13 @@
 if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-    export PATH="$PATH:$HOME/.rbenv/bin"
+    export PATH="$PATH:$HOME/.rbenv/bin:/usr/local/gocode/bin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export PATH="$PATH:/Users/trodrigues/android-sdk-macosx/tools:/Users/trodrigues/android-sdk-macosx/platform-tools"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
     export VAGRANT_DEFAULT_PROVIDER="virtualbox"
+    export GOPATH="/usr/local/gocode"
 
     # increase the number of processes per uid
     ulimit -u 400
@@ -58,4 +59,10 @@ function lag() {
 # for sublimerge
 function subldiff(){
   git show $1:$2|subl
+}
+
+cdfzz() {
+  local file=$(fzz find . -iname "*{{}}*" | head -n 1)
+  local filedir=$(dirname ${file})
+  cd ${filedir}
 }

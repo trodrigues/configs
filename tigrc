@@ -1,3 +1,2 @@
-bind main right !sh -c "git show-files %(commit) | less"
 bind generic I !@sh -c "echo %(commit) | pbcopy"
 

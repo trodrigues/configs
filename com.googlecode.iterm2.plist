@@ -398,13 +398,17 @@
 	<key>NSTableView Sort Ordering KeyBingingTable</key>
 	<array/>
 	<key>NSWindow Frame Preferences</key>
-	<string>259 263 924 485 0 0 1680 1028 </string>
+	<string>259 264 924 485 0 0 1680 1028 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>650 674 384 129 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 12 1674 1016 0 0 1680 1028 </string>
+	<string>4 1050 1676 454 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1029 551 650 476 0 0 1680 1028 </string>
+	<string>4 540 650 476 0 0 1680 1028 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>271 50 650 476 0 0 1680 1028 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>292 27 650 476 0 0 1680 1028 </string>
 	<key>NeverWarnAboutShortLivedSessions_DD1B6308-EE2E-4B59-B796-13716040A38C</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -1130,6 +1134,8 @@
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>Allow Title Reporting</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -1289,6 +1295,8 @@
 				<key>Red Component</key>
 				<real>0.13574661314487457</real>
 			</dict>
+			<key>Background Image Is Tiled</key>
+			<false/>
 			<key>Background Image Location</key>
 			<string></string>
 			<key>Blend</key>
@@ -1830,6 +1838,10 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Canonical Parser</key>
+			<false/>
+			<key>Use Italic Font</key>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -1842,6 +1854,8 @@
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>Allow Title Reporting</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -2001,6 +2015,8 @@
 				<key>Red Component</key>
 				<real>0.0</real>
 			</dict>
+			<key>Background Image Is Tiled</key>
+			<false/>
 			<key>Background Image Location</key>
 			<string></string>
 			<key>Blend</key>
@@ -2540,6 +2556,10 @@
 			<true/>
 			<key>Use Bright Bold</key>
 			<true/>
+			<key>Use Canonical Parser</key>
+			<false/>
+			<key>Use Italic Font</key>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -2622,9 +2642,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-06-19T10:57:34Z</date>
-	<key>SUSkippedVersion</key>
-	<string>1.0.0.20140518</string>
+	<date>2014-11-04T11:20:57Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -2666,7 +2684,7 @@
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
-	<string>Lucida Grande</string>
+	<string>.Lucida Grande UI</string>
 	<key>WindowNumber</key>
 	<true/>
 	<key>WindowStyle</key>
@@ -2678,6 +2696,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140112</string>
+	<string>2.0.0.20141022</string>
 </dict>
 </plist>
