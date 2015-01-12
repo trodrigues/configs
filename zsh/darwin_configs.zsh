@@ -75,3 +75,10 @@ cdfzz() {
   local filedir=$(dirname ${file})
   cd ${filedir}
 }
+
+mvim(){
+  local session=`cat .vim_session`
+  if [ "$session" != "" ] ; then
+    /usr/local/bin/mvim -S $HOME/.vim/sessions/$session.vim
+  fi
+}
