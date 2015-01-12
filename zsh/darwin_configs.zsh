@@ -20,6 +20,11 @@ if [ "$uname" = "Darwin" ] ; then
     fi
 fi
 
+alias contentful-start="cd $HOME/contentful/lab && vagrant up && ssh -t lab -- tmuxinator start user_interface"
+alias contentful-stop="cd $HOME/contentful/lab && vagrant halt -f"
+alias contentful-restart="cd $HOME/contentful/lab && vagrant halt -f && vagrant up && ssh -t lab -- tmuxinator start user_interface"
+alias contentful-ssh="cd $HOME/contentful/lab && ssh -t lab -- tmuxinator start user_interface"
+
 function start {
   find ~/Library/LaunchAgents/ -name "*$1*"
   find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl load {} \;

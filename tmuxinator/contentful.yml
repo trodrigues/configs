@@ -21,15 +21,14 @@ root: ~/contentful/lab/
 # NOTE: use tmux list-windows to get a layout configuration
 
 windows:
-  - daemons: vagrant up && vagrant ssh
   - ui:
       layout: fc1f,169x37,0,0{84x37,0,0,0,84x37,85,0[84x25,85,0,2,84x6,85,26,3,84x4,85,33,4]}
       panes:
         - cd user_interface
         - cd user_interface && gitsh
         - cd user_interface
-        - cd user_interface && echo "vagrant ssh && jasstart"
-  - user_interface: cd user_interface
+        - cd user_interface
+  - user_interface: cd user_interface && tig
   - client:
       layout: 224a,208x54,0,0{104x54,0,0,3,103x54,105,0,16}
       panes:
