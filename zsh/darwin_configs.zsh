@@ -18,6 +18,10 @@ if [ "$uname" = "Darwin" ] ; then
     if [ -f /usr/local/etc/cacert.pem ] ; then
       export SSL_CERT_FILE=/usr/local/etc/cacert.pem
     fi
+
+    export DOCKER_HOST=tcp://192.168.59.103:2376
+    export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
+    export DOCKER_TLS_VERIFY=1
 fi
 
 alias contentful-start="cd $HOME/contentful/lab && vagrant up && ssh -t lab -- tmuxinator start user_interface"
