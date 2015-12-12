@@ -1,8 +1,0 @@
-<snippet>
-    <content><![CDATA[
-\{\{& ${1:variable} \}\}
-]]></content>
-    <tabTrigger>mvs</tabTrigger>
-    <description>Mustache Variable (Safe)</description>
-    <scope>text.html.mustache</scope>
-</snippet>

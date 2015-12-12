@@ -1,6 +1,0 @@
-<snippet>
-    <content><![CDATA[after(function($1){$2});]]></content>
-    <tabTrigger>after</tabTrigger>
-    <scope>source.js</scope>
-    <description>after test</description>
-</snippet>
