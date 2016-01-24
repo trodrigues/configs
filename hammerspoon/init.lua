@@ -21,7 +21,7 @@ hs.hotkey.bind({"shift", "alt", "ctrl"}, "down", function()
   win, frame, screen, viewp = rsutils()
   frame.x = viewp.x
   frame.y = viewp.y
-  frame.w = (viewp.w / 3) * 2
+  frame.w = (viewp.w / 4) * 3
   frame.h = viewp.h
   win:setFrame(frame)
 end)
@@ -29,9 +29,9 @@ end)
 -- sizes window to 3rds width, right aligned, max height
 hs.hotkey.bind({"shift", "alt", "ctrl"}, "up", function()
   win, frame, screen, viewp = rsutils()
-  frame.x = viewp.x + viewp.w / 3
+  frame.x = viewp.x + viewp.w / 5
   frame.y = viewp.y
-  frame.w = (viewp.w / 3) * 2
+  frame.w = (viewp.w / 5) * 4
   frame.h = viewp.h
   win:setFrame(frame)
 end)
@@ -117,15 +117,21 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   win:setFrame(frame)
 end)
 
+-- TODO
+-- use some of the code below to override cmd+d on chrome and launch pinboard instead
 
 -- experimental
 function getCurrentSpaceWindowsForApp()
+  log:d('Current Space Windows')
   apps = hs.application.runningApplications()
   for name, app in pairs(apps) do
-    if app:name() == 'Google Chrome' then
-      for title, window in pairs(app:visibleWindows()) do
-        log:d(window:title())
+    for title, window in pairs(app:visibleWindows()) do
+      log:d(app:name(), ': ', window:title())
+      if app:name() == 'Google Chrome' then
+        log:d(hs.inspect(app:selectMenuItem({"Bookmarks", "tag"})))
       end
     end
   end
 end
+
+hs.hotkey.bind({"cmd", "alt", "ctrl"}, "s", getCurrentSpaceWindowsForApp)
