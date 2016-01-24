@@ -10,6 +10,7 @@ zstyle ':completion:*' substitute 1
 sshconfig="$HOME/.ssh/config"
 zstyle ':completion:*:(ssh|scp|sftp):*' hosts $sshconfig
 zstyle :compinstall filename '$HOME/.zshrc'
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload -Uz compinit
 compinit
