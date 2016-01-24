@@ -14,6 +14,7 @@
     dito = difftool
     standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
     show-files = show --name-status
+  last-hash = log -n 1 --format=%h
 [difftool "Kaleidoscope"]
 [difftool]
 [diff]

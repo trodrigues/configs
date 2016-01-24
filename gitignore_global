@@ -1,7 +1,12 @@
 *~
 .DS_Store
 .tern-port
+.tern-project
 stdout
 debug.log
 vm_dot_profile
 .vim_session
+.lvimrc
+node_modules
+Gemfile.lock
+npm-debug.log
