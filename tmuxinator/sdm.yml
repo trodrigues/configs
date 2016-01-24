@@ -1,0 +1,16 @@
+# ~/.tmuxinator/sdm.yml
+
+name: sdm
+root: ~/code/sonic-death-monkey
+
+windows:
+  - servers:
+      layout: main-vertical
+      panes:
+        - node app.js
+        - make watch
+  - code:
+      layout: main-vertical
+      panes:
+        - gitsh
+        - #

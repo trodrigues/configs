@@ -22,29 +22,29 @@ root: ~/contentful/lab/
 
 windows:
   - ui:
-      layout: fc1f,169x37,0,0{84x37,0,0,0,84x37,85,0[84x25,85,0,2,84x6,85,26,3,84x4,85,33,4]}
+      layout: even-horizontal
       panes:
         - cd user_interface
-        - cd user_interface && gitsh
-        - cd user_interface
-        - cd user_interface
-  - user_interface: cd user_interface && tig
+        - cd user_interface; gitsh
+  - user_interface: cd user_interface; tig
   - client:
-      layout: 224a,208x54,0,0{104x54,0,0,3,103x54,105,0,16}
+      layout: even-horizontal
       panes:
         - cd client
-        - cd client && gitsh
-  - marketing:
-      layout: f032,208x53,0,0{104x53,0,0,6,103x53,105,0[103x36,105,0,13,103x16,105,37,14]}
-      panes:
-        - cd marketing
-        - cd marketing && gitsh
-        - #
+        - cd client; gitsh
   - gatekeeper:
-      layout: a24a,208x54,0,0{104x54,0,0,6,103x54,105,0,14}
+      layout: even-horizontal
       panes:
         - cd gatekeeper
-        - cd gatekeeper && gitsh
-  - contentful: cd ..
-  - contentful: cd ..
+        - cd gatekeeper; gitsh
+  - widget_api:
+      layout: even-horizontal
+      panes:
+        - cd contentful-widget-api
+        - cd contentful-widget-api; gitsh
+  - widget_sdk:
+      layout: even-horizontal
+      panes:
+        - cd widget-prototypes
+        - cd widget-prototypes; gitsh
   - contentful: cd ..

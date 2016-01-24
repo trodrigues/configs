@@ -1,0 +1,52 @@
+# ~/.tmuxinator/contentful.yml
+
+name: cfeco
+root: ~/contentful/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+#
+# NOTE: use tmux list-windows to get a layout configuration
+
+windows:
+  - playground:
+      layout: even-horizontal
+      panes:
+        - cd playground
+        - cd playground; gitsh
+  - management:
+      layout: even-horizontal
+      panes:
+        - cd contentful-management.js
+        - cd contentful-management.js; gitsh
+  - delivery:
+      layout: even-horizontal
+      panes:
+        - cd contentful.js
+        - cd contentful.js; gitsh
+  - docs:
+      layout: even-horizontal
+      panes:
+        - cd slash-developers
+        - cd slash-developers; gitsh
+  - www:
+      layout: even-horizontal
+      panes:
+        - cd marketing-website
+        - cd marketing-website; gitsh
+  - contentful: ls
+  - contentful: ls
+  - contentful: ls
+  - contentful: ls
