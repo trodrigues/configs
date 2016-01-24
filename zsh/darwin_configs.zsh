@@ -2,7 +2,6 @@ if [ "$uname" = "Darwin" ] ; then
     export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
     export PATH="$PATH:$HOME/.rbenv/bin:/usr/local/gocode/bin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
-    export PATH="$PATH:/Users/trodrigues/android-sdk-macosx/tools:/Users/trodrigues/android-sdk-macosx/platform-tools"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
 
@@ -18,16 +17,7 @@ if [ "$uname" = "Darwin" ] ; then
     if [ -f /usr/local/etc/cacert.pem ] ; then
       export SSL_CERT_FILE=/usr/local/etc/cacert.pem
     fi
-
-    export DOCKER_HOST=tcp://192.168.59.103:2376
-    export DOCKER_CERT_PATH=$HOME/.boot2docker/certs/boot2docker-vm
-    export DOCKER_TLS_VERIFY=1
 fi
-
-alias contentful-start="cd $HOME/contentful/lab && vagrant up && ssh -t lab -- tmuxinator start user_interface"
-alias contentful-stop="cd $HOME/contentful/lab && vagrant halt -f"
-alias contentful-restart="cd $HOME/contentful/lab && vagrant halt -f && vagrant up && ssh -t lab -- tmuxinator start user_interface"
-alias contentful-ssh="cd $HOME/contentful/lab && ssh -t lab -- tmuxinator start user_interface"
 
 function start {
   find ~/Library/LaunchAgents/ -name "*$1*"
@@ -38,12 +28,6 @@ function stop {
   find ~/Library/LaunchAgents/ -name "*$1*"
   find ~/Library/LaunchAgents/ -name "*$1*" -exec launchctl unload {} \;
 }
-
-alias start_nginx="/usr/local/bin/nginx_ctl"
-alias stop_nginx="/usr/local/bin/nginx_ctl -s stop"
-alias quit_nginx="/usr/local/bin/nginx_ctl -s quit"
-alias reopen_nginx="/usr/local/bin/nginx_ctl -s reopen"
-alias reload_nginx="/usr/local/bin/nginx_ctl -s reload"
 
 function backup_iphoto_lib(){
   rsync -avz ~/Pictures/iPhoto\ Library/ /Volumes/elements/iPhoto\ Library
@@ -77,8 +61,12 @@ cdfzz() {
 }
 
 mvim(){
-  local session=`cat .vim_session`
-  if [ "$session" != "" ] ; then
-    /usr/local/bin/mvim -S $HOME/.vim/sessions/$session.vim
+  if [ -f .vim_session ] ; then
+    local session=`cat .vim_session`
+    if [ "$session" != "" ] ; then
+      /usr/local/bin/mvim -S $HOME/.vim/sessions/$session.vim
+    fi
+  else
+    /usr/local/bin/mvim $*
   fi
 }
