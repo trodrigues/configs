@@ -1,0 +1,11 @@
+*.swp
+*.pyc
+.DS_Store
+.htaccess
+vim
+work
+sshconfig
+alfred
+zsh/tmp
+vim/dot_vim
+zsh/private.zsh

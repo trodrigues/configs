@@ -64,6 +64,7 @@ load_zsh_config prompt
 
 load_zsh_config aliases
 load_zsh_config contentful
+load_zsh_config private
 
 export NVM_DIR="/Users/trodrigues/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
