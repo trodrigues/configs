@@ -19,7 +19,7 @@ compinit
 HISTFILE=~/.histfile
 HISTSIZE=6000
 SAVEHIST=6000
-setopt appendhistory extendedglob nomatch notify promptsubst 
+setopt appendhistory extendedglob nomatch notify promptsubst
 setopt completealiases vi zle
 unsetopt autocd beep
 bindkey -v
@@ -38,6 +38,8 @@ export EDITOR=/usr/bin/vi
 export LC_CTYPE=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
+
+eval "$(direnv hook zsh)"
 
 load_zsh_config(){
     local configfile=$CONFIGSHOME/zsh/$1.zsh
@@ -61,10 +63,12 @@ load_zsh_config darwin_configs
 load_zsh_config linux_configs
 
 load_zsh_config prompt
-
 load_zsh_config aliases
-load_zsh_config contentful
+load_zsh_config docker
+
 load_zsh_config private
+load_zsh_config parrot
+load_zsh_config laterpay
 
 export NVM_DIR="/Users/trodrigues/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
