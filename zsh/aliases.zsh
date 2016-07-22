@@ -22,25 +22,10 @@ alias sync-music="rsync -avz /Users/trodrigues/Music/iTunes/iTunes\ Media/Music/
 
 alias git-firewall-bypass="git config --global url.\"https://\".insteadOf git://"
 
-docker-rm-ps(){
-  docker rm `docker ps -a -q`
-}
-docker-rmi-untagged(){
-  docker rmi `docker images | awk '$$2 ~ /none/ {print $$3}'`
+npm-open(){
+  open https://npmjs.com/package/$1
 }
 
-docker-start(){
-  dinghy up
-  eval "$(docker-machine env dinghy)"
+function lag() {
+  ag --color "$@" | less -r
 }
-docker-stop-all(){
-  docker stop `docker ps -q`
-}
-docker-env-eval(){
-  eval "$(docker-machine env $1)"
-}
-
-if [ `docker-machine ls --filter name=dinghy --filter state=Running -q|wc -l` -gt 0 ] ; then
-  eval "$(docker-machine env dinghy)"
-fi
-

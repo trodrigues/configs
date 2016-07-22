@@ -22,7 +22,7 @@ zsh_git_chpwd_update_vars() {
 
 preexec_functions+='zsh_git_preexec_update_vars'
 zsh_git_preexec_update_vars() {
-    case "$(history $HISTCMD)" in 
+    case "$(history $HISTCMD)" in
         *git*)
             zsh_git_invalidate_vars
         ;;
@@ -50,8 +50,6 @@ function prompt {
     if [ "$SSH_TTY" != "" ] ; then
         PS1=$PS1"%F{magenta}%m%f"
     fi
-    PS1=$PS1"%F{green}%#%f "
+    PS1=$PS1$'\n'"%F{green}%#%f "
 }
 prompt
-
-
