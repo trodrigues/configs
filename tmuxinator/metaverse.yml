@@ -1,0 +1,27 @@
+# ~/.tmuxinator/metaverse.yml
+
+name: metaverse
+root: ~/code
+
+windows:
+  - metaverse:
+      layout: even-horizontal
+      panes:
+        - cd metaverse; ls
+        - cd metaverse; tig
+  - trodrigues:
+      layout: even-horizontal
+      panes:
+        - cd trodrigues.net; ls
+        - cd trodrigues.net; tig
+  - mlserver:
+      layout: even-horizontal
+      panes:
+        - cd mindlocker-server; ls
+        - cd mindlocker-server; tig
+  - mlwebapp:
+      layout: even-horizontal
+      panes:
+        - cd mindlocker-webapp; ls
+        - cd mindlocker-webapp; tig
+

@@ -21,7 +21,7 @@ hs.hotkey.bind({"shift", "alt", "ctrl"}, "down", function()
   win, frame, screen, viewp = rsutils()
   frame.x = viewp.x
   frame.y = viewp.y
-  frame.w = (viewp.w / 4) * 3
+  frame.w = (viewp.w / 6) * 4
   frame.h = viewp.h
   win:setFrame(frame)
 end)
@@ -29,9 +29,9 @@ end)
 -- sizes window to 3rds width, right aligned, max height
 hs.hotkey.bind({"shift", "alt", "ctrl"}, "up", function()
   win, frame, screen, viewp = rsutils()
-  frame.x = viewp.x + viewp.w / 5
+  frame.x = viewp.x + (viewp.w / 6) * 2
   frame.y = viewp.y
-  frame.w = (viewp.w / 5) * 4
+  frame.w = (viewp.w / 6) * 4
   frame.h = viewp.h
   win:setFrame(frame)
 end)

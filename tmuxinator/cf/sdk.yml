@@ -1,6 +1,4 @@
-# ~/.tmuxinator/contentful.yml
-
-name: cfeco
+name: cf/sdk
 root: ~/contentful/
 
 # Optional tmux socket
@@ -24,29 +22,26 @@ windows:
   - playground:
       layout: even-horizontal
       panes:
-        - cd playground
-        - cd playground; gitsh
-  - management:
-      layout: even-horizontal
-      panes:
-        - cd contentful-management.js
-        - cd contentful-management.js; gitsh
+        - cd contentful-js-playground
+        - cd contentful-js-playground; gitsh
   - delivery:
       layout: even-horizontal
       panes:
         - cd contentful.js
-        - cd contentful.js; gitsh
-  - docs:
+        - cd contentful.js; tig
+  - management:
       layout: even-horizontal
       panes:
-        - cd slash-developers
-        - cd slash-developers; gitsh
-  - www:
+        - cd contentful-management.js
+        - cd contentful-management.js; tig
+  - core:
       layout: even-horizontal
       panes:
-        - cd marketing-website
-        - cd marketing-website; gitsh
-  - contentful: ls
-  - contentful: ls
-  - contentful: ls
-  - contentful: ls
+        - cd contentful-sdk-core
+        - cd contentful-sdk-core; tig
+  - jsdoc:
+      layout: even-horizontal
+      panes:
+        - cd contentful-sdk-jsdoc
+        - cd contentful-sdk-jsdoc; tig
+

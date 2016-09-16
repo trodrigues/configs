@@ -3,8 +3,11 @@ if [ "$uname" = "Darwin" ] ; then
     export PATH="$PATH:$HOME/.rbenv/bin:/usr/local/gocode/bin"
     export PATH="$PATH:/usr/X11/bin:/opt/local/bin:/usr/local/git/bin"
     export PATH="$PATH:./node_modules/.bin"
+    export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"
     export MANPATH="$MANPATH:/Users/trodrigues/Code/javascript/node/share/man"
     colorarg="-G"
+
+    export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
     export VAGRANT_DEFAULT_PROVIDER="virtualbox"
     export GOPATH="/usr/local/gocode"

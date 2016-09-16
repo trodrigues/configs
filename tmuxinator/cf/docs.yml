@@ -1,7 +1,5 @@
-# ~/.tmuxinator/sw.yml
-
-name: sw
-root: ~/contentful/guide-app-sw
+name: cf/docs
+root: ~/contentful/
 
 # Optional tmux socket
 # socket_name: foo
@@ -17,12 +15,18 @@ root: ~/contentful/guide-app-sw
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
+#
+# NOTE: use tmux list-windows to get a layout configuration
 
 windows:
-  - server:
+  - docs:
       layout: even-horizontal
       panes:
-        - node server.js
-        - make watch
-  - tig: tig
-  - sw: ls
+        - cd slash-developers
+        - cd slash-developers; gitsh
+  - www:
+      layout: even-horizontal
+      panes:
+        - cd marketing-website
+        - cd marketing-website; gitsh
+  - contentful: ls

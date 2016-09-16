@@ -30,3 +30,19 @@ docker-stop-all(){
 docker-env-eval(){
   eval "$(docker-machine env $1)"
 }
+
+#############################
+# Personal Linux container for Linux shenanigans
+############################
+linux-rebuild() {
+  cd $HOME/code/linux
+  docker build -t linux .
+}
+
+linux-shell() {
+  docker run -it linux bash
+}
+
+linux-run() {
+  docker run -it linux $*
+}

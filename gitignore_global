@@ -2,11 +2,15 @@
 .DS_Store
 .tern-port
 .tern-project
+node_modules
+npm-debug.log
 stdout
 debug.log
 vm_dot_profile
 .vim_session
 .lvimrc
-node_modules
 Gemfile.lock
-npm-debug.log
+.idea
+trunk
+.htaccess
+*.pyc

@@ -1,7 +1,5 @@
-# ~/.tmuxinator/trodrigues.yml
-
-name: trodrigues
-root: ~/code/trodrigues.net
+name: cf/sync
+root: ~/contentful/
 
 # Optional tmux socket
 # socket_name: foo
@@ -17,10 +15,23 @@ root: ~/code/trodrigues.net
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
+#
+# NOTE: use tmux list-windows to get a layout configuration
 
 windows:
-  - editor:
+  - spacesync:
       layout: even-horizontal
       panes:
-        - harp server
-        - #
+        - cd contentful-space-sync
+        - cd contentful-space-sync; gitsh
+  - linkcleaner:
+      layout: even-horizontal
+      panes:
+        - cd contentful-link-cleaner
+        - cd contentful-link-cleaner; gitsh
+  - batchlibs:
+      layout: even-horizontal
+      panes:
+        - cd contentful-batch-libs
+        - cd contentful-batch-libs; gitsh
+  - contentful: ls

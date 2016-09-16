@@ -1,9 +1,9 @@
-laterpay-stop() {
-  docker-stop-all
+lp-stop() {
   tmux kill-session -t laterpay
+  docker-stop-all
 }
 
-laterpay-build-all-images() {
+lp-build-all-images() {
   for i in * ; do
     if [ -f $i/Dockerfile ] ; then
       pushd $i
@@ -13,7 +13,7 @@ laterpay-build-all-images() {
   done
 }
 
-laterpay-postgres-docker() {
+lp-postgres-docker() {
   POSTGRES_DOCKER_CONTAINER=$(docker-compose ps | grep postgres | awk '{print $1}')
   docker exec -it -u postgres $POSTGRES_DOCKER_CONTAINER bash
 }

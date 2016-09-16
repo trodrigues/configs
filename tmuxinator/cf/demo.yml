@@ -1,7 +1,5 @@
-# ~/.tmuxinator/trodrigues.yml
-
-name: trodrigues
-root: ~/code/trodrigues.net
+name: cf/demo
+root: ~/contentful/
 
 # Optional tmux socket
 # socket_name: foo
@@ -17,10 +15,18 @@ root: ~/code/trodrigues.net
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
+#
+# NOTE: use tmux list-windows to get a layout configuration
 
 windows:
-  - editor:
+  - discovery:
       layout: even-horizontal
       panes:
-        - harp server
-        - #
+        - cd contentful-react-discovery
+        - cd contentful-react-discovery; gitsh
+  - product:
+      layout: even-horizontal
+      panes:
+        - cd product-catalogue-js
+        - cd product-catalogue-js; gitsh
+  - contentful: ls
