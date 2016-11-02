@@ -17,7 +17,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
 	<key>CommandSelection</key>
@@ -30926,11 +30926,11 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>853 555 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>972 768 620 392 0 0 2560 1417 </string>
+	<string>971 724 700 437 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2829 228 796 473 2560 145 1440 900 </string>
+	<string>949 530 796 473 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 988 2560 429 0 0 2560 1417 </string>
+	<string>0 733 2560 684 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>493 83 650 452 0 0 2560 1417 </string>
 	<key>NeverWarnAboutShortLivedSessions_DD1B6308-EE2E-4B59-B796-13716040A38C</key>
@@ -33124,6 +33124,8 @@
 	<false/>
 	<key>OpenBookmark</key>
 	<false/>
+	<key>OpenNoWindowsAtStartup</key>
+	<false/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>1</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
@@ -33182,11 +33184,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=57</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=57</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-08-29T10:15:23Z</date>
+	<date>2016-09-21T13:32:46Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -33240,6 +33242,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.8</string>
+	<string>3.0.10</string>
 </dict>
 </plist>

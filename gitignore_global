@@ -14,3 +14,4 @@ Gemfile.lock
 trunk
 .htaccess
 *.pyc
+.envrc
