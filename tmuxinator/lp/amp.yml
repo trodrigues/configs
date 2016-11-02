@@ -1,0 +1,20 @@
+name: amp
+root: ~/laterpay
+
+windows:
+  - amp:
+      layout: even-horizontal
+      panes:
+        - amphtml:
+          - cd ../code/amphtml
+        - ampgit:
+          - cd ../code/amphtml
+          - tig
+  - prototype:
+      layout: even-horizontal
+      panes:
+        - prototype:
+          - cd amp-prototype
+        - prototypegit:
+          - cd amp-prototype
+          - tig

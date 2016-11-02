@@ -1,0 +1,15 @@
+name: lp/docs
+root: ~/laterpay
+
+windows:
+  - lpdocs:
+      layout: even-horizontal
+      panes:
+        - runlpdocs:
+          - cd lpdocs
+          - docker run --publish 8001:8000 --volume /Users/trodrigues/laterpay/lpdocs/lpdocs:/opt/laterpay/internaldocs/lpdocs -ti laterpay/lpdocs make preview
+        - cdlpdocs:
+          - cd lpdocs
+          - gitsh
+  - lp:
+    - ls

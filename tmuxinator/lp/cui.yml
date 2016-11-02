@@ -1,0 +1,32 @@
+name: lp/cui
+root: ~/laterpay
+
+windows:
+  - connectorui:
+      layout: even-horizontal
+      panes:
+        - run:
+          - cd connector-ui
+          - docker-compose up connector-ui
+        - tests:
+          - cd connector-ui
+          - docker-compose up test-server
+  - git:
+      layout: even-horizontal
+      panes:
+        - gitsh:
+          - cd connector-ui
+          - gitsh
+        - cuigit:
+          - cd connector-ui
+          - tig
+  - assets:
+      layout: even-horizontal
+      panes:
+        - assetswatch:
+          - cd assets
+        - assetstig:
+          - cd assets
+          - tig
+  - lp:
+    - ls
