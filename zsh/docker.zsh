@@ -12,7 +12,8 @@ docker-rm-ps-name() {
 
 # Remove all untagged images
 docker-rmi-untagged(){
-  docker rmi `docker images | awk '$$2 ~ /none/ {print $$3}'`
+  docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+  #docker rmi `docker images | awk '$$2 ~ /none/ {print $$3}'`
 }
 
 # Remove an image tagged with a given name:

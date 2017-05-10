@@ -1,3 +1,4 @@
+bind generic H !@sh gitsh
 bind generic I !@sh -c "echo %(commit) | pbcopy"
 bind status A !git commit --amend
 bind status Z !git cz

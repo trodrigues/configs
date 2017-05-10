@@ -1,24 +1,30 @@
-name: lp/cui
+name: mongoose
 root: ~/laterpay
 
 windows:
-  - connectorui:
+  - webshell:
+      - cd webshell/dockerfiles
+      - docker-compose up -d cassandra redis postgres
+      - sleep 20
+      - docker-compose up -d
+      - docker-compose logs --follow
+  - mongoose:
       layout: even-horizontal
       panes:
         - run:
-          - cd connector-ui
-          - docker-compose up connector-ui
+          - cd mongoose
+          - npm run watch
         - tests:
-          - cd connector-ui
-          - docker-compose up test-server
+          - cd mongoose
+          - npm run test
   - git:
       layout: even-horizontal
       panes:
         - gitsh:
-          - cd connector-ui
+          - cd mongoose
           - gitsh
         - cuigit:
-          - cd connector-ui
+          - cd mongoose
           - tig
   - assets:
       layout: even-horizontal

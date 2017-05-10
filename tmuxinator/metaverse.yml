@@ -14,14 +14,14 @@ windows:
       panes:
         - cd trodrigues.net; ls
         - cd trodrigues.net; tig
-  - mlserver:
+  - cosmog:
       layout: even-horizontal
       panes:
-        - cd mindlocker-server; ls
-        - cd mindlocker-server; tig
-  - mlwebapp:
+        - cd cosmog; ls
+        - cd cosmog; tig
+  - nebby:
       layout: even-horizontal
       panes:
-        - cd mindlocker-webapp; ls
-        - cd mindlocker-webapp; tig
+        - cd nebby; ls
+        - cd nebby; tig
 

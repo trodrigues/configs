@@ -1,8 +1,3 @@
-lp-stop() {
-  tmux kill-session -t laterpay
-  docker-stop-all
-}
-
 lp-build-all-images() {
   for i in * ; do
     if [ -f $i/Dockerfile ] ; then

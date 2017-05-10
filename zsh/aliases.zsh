@@ -29,3 +29,7 @@ npm-open(){
 function lag() {
   ag --color "$@" | less -r
 }
+
+function mux-stop() {
+  tmux kill-session -t $1
+}

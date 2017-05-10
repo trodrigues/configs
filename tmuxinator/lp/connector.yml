@@ -1,30 +1,27 @@
-name: lp/mongoose
+name: connector
 root: ~/laterpay
 
 windows:
-  - webshell:
-      - cd webshell/dockerfiles
-      - docker-compose up -d cassandra redis postgres
-      - sleep 20
-      - docker-compose up -d
-      - docker-compose logs --follow
-  - mongoose:
+  - connector:
+      - cd connector
+      - docker-compose up connector-standalone
+  - connectorui:
       layout: even-horizontal
       panes:
         - run:
-          - cd mongoose
-          - npm run watch
+          - cd connector-ui
+          - docker-compose up connector-ui
         - tests:
-          - cd mongoose
-          - npm run test
+          - cd connector-ui
+          - docker-compose run test-server
   - git:
       layout: even-horizontal
       panes:
         - gitsh:
-          - cd mongoose
+          - cd connector-ui
           - gitsh
         - cuigit:
-          - cd mongoose
+          - cd connector-ui
           - tig
   - assets:
       layout: even-horizontal
