@@ -3,15 +3,20 @@ root: ~/laterpay
 
 windows:
   - amp:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
-        - amphtml:
-          - cd ../code/amphtml
         - ampgit:
           - cd ../code/amphtml
           - tig
+        - ampgitsh:
+          - cd ../code/amphtml
+          - gitsh
+        - amphtmlserve:
+          - cd ../code/amphtml
+        - amphtmlbuild:
+          - cd ../code/amphtml
   - prototype:
-      layout: even-horizontal
+      layout: even-vertical
       panes:
         - prototype:
           - cd amp-prototype

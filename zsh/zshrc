@@ -65,6 +65,7 @@ load_zsh_config linux_configs
 load_zsh_config prompt
 load_zsh_config aliases
 load_zsh_config docker
+load_zsh_config npx_aliases
 
 load_zsh_config private
 load_zsh_config parrot
