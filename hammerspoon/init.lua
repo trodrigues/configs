@@ -117,6 +117,20 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   win:setFrame(frame)
 end)
 
+
+-- switch to and from Alternote
+prevFrontmost = nil
+hs.hotkey.bind({"cmd"}, "F2", function()
+  currentFrontmost = hs.application.frontmostApplication()
+  if currentFrontmost:name() ~= 'Alternote' then
+    prevFrontmost = hs.application.frontmostApplication()
+    hs.application.get('Alternote'):activate()
+  else
+    prevFrontmost:activate()
+    prevFrontmost = nil
+  end
+end)
+
 -- TODO
 -- use some of the code below to override cmd+d on chrome and launch pinboard instead
 

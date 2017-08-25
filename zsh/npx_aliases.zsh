@@ -1,0 +1,7 @@
+alias wordflip="npx wordflip"
+alias json="npx json"
+alias gulp="npx gulp"
+alias yarn="npx yarn"
+alias nodemon="npx nodemon"
+alias http-server="npx http-server"
+alias create-react-app="npx create-react-app"
