@@ -1,0 +1,16 @@
+name: vader
+root: ~/laterpay
+
+windows:
+  - lpdocs:
+      layout: even-horizontal
+      panes:
+        - runlpdocs:
+          - cd vader
+          - docker-compose up vader
+            #          - docker run --publish 8001:8000 --volume /Users/trodrigues/laterpay/lpdocs/lpdocs:/opt/laterpay/internaldocs/lpdocs -ti laterpay/lpdocs make preview
+        - cdlpdocs:
+          - cd vader
+          - gitsh
+  - lp:
+    - ls

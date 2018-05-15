@@ -118,18 +118,83 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
 end)
 
 
--- switch to and from Alternote
+-- switch to and from Note taking app
 prevFrontmost = nil
 hs.hotkey.bind({"cmd"}, "F2", function()
   currentFrontmost = hs.application.frontmostApplication()
-  if currentFrontmost:name() ~= 'Alternote' then
+  if currentFrontmost:name() ~= 'Notion' then
     prevFrontmost = hs.application.frontmostApplication()
-    hs.application.get('Alternote'):activate()
+    hs.application.get('Notion'):activate()
   else
     prevFrontmost:activate()
     prevFrontmost = nil
   end
 end)
+
+-- enhance desktop switch shortcuts to switch vertical screen as well
+-- do this only for the Hackintosh
+if string.find(hs.host.localizedName(), "DEACTIVATEDHackintosh") ~= nil then
+  currentDesktop = nil
+  firstDesktopFrontmost = nil
+  secondDesktopFrontmost = nil
+  thirdDesktopFrontmost = nil
+  doAfterWait = 0.3
+
+  hs.hotkey.bind({"alt", "shift"}, "p", function()
+    if currentDesktop == 2 then
+      secondDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    if currentDesktop == 3 then
+      thirdDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    hs.eventtap.keyStroke({"alt", "shift"}, "0")
+    currentDesktop = 1
+    hs.timer.doAfter(doAfterWait, function()
+      if firstDesktopFrontmost then
+        firstDesktopFrontmost:activate()
+      end
+    end)
+  end)
+  hs.hotkey.bind({"alt", "shift"}, "[", function()
+    if currentDesktop == 1 then
+      firstDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    if currentDesktop == 3 then
+      thirdDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    hs.eventtap.keyStroke({"alt", "shift"}, "-")
+    currentDesktop = 2
+    hs.timer.doAfter(doAfterWait, function()
+      if secondDesktopFrontmost then
+        secondDesktopFrontmost:activate()
+      end
+    end)
+  end)
+  hs.hotkey.bind({"alt", "shift"}, "]", function()
+    if currentDesktop == 1 then
+      firstDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    if currentDesktop == 2 then
+      secondDesktopFrontmost = hs.application.frontmostApplication()
+    end
+    hs.eventtap.keyStroke({"alt", "shift"}, "=")
+    currentDesktop = 3
+    hs.timer.doAfter(doAfterWait, function()
+      if thirdDesktopFrontmost then
+        thirdDesktopFrontmost:activate()
+      end
+    end)
+  end)
+  hs.hotkey.bind({"alt", "shift"}, "l", function()
+    currentDesktop = 4
+  end)
+  hs.hotkey.bind({"alt", "shift"}, ";", function()
+    currentDesktop = 5
+  end)
+  hs.hotkey.bind({"alt", "shift"}, "'", function()
+    currentDesktop = 6
+  end)
+end
 
 -- TODO
 -- use some of the code below to override cmd+d on chrome and launch pinboard instead

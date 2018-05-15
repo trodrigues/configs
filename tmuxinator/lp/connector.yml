@@ -6,16 +6,16 @@ windows:
       - cd connector
       - docker-compose up connector-standalone
   - connectorui:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - run:
           - cd connector-ui
-          - docker-compose up connector-ui
+          - make start
         - tests:
           - cd connector-ui
-          - docker-compose run test-server
+          - npm run test:watch
   - git:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - gitsh:
           - cd connector-ui
@@ -24,7 +24,7 @@ windows:
           - cd connector-ui
           - tig
   - assets:
-      layout: even-vertical
+      layout: even-horizontal
       panes:
         - assetswatch:
           - cd assets
