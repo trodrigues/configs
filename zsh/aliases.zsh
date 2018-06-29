@@ -33,3 +33,18 @@ function lag() {
 function mux-stop() {
   tmux kill-session -t $1
 }
+
+function testcafe-chrome-canary() {
+  setopt -x
+  testcafe 'path:`/Users/trodrigues/Applications/Google Chrome Canary.app`' $@
+}
+
+function testcafe-chrome() {
+  setopt -x
+  testcafe 'path:`/Users/trodrigues/Applications/Google Chrome.app`' $@
+}
+
+function testcafe-firefox() {
+  setopt -x
+  testcafe 'path:`/Users/trodrigues/Applications/Firefox.app`' $@
+}

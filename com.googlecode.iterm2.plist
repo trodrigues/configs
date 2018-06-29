@@ -14,6 +14,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AppleWindowTabbingMode</key>
+	<string>manual</string>
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
@@ -30742,7 +30744,7 @@
 		</dict>
 	</dict>
 	<key>Default Bookmark Guid</key>
-	<string>DD1B6308-EE2E-4B59-B796-13716040A38C</string>
+	<string>9DC7B6AE-042E-4113-AD66-0FB7203F8EFA</string>
 	<key>DimBackgroundWindows</key>
 	<false/>
 	<key>DimInactiveSplitPanes</key>
@@ -30870,11 +30872,13 @@
 	<key>HotKeyTogglesWindow</key>
 	<true/>
 	<key>Hotkey</key>
-	<true/>
+	<false/>
 	<key>HotkeyChar</key>
-	<integer>63236</integer>
+	<integer>0</integer>
 	<key>HotkeyCode</key>
-	<integer>122</integer>
+	<integer>0</integer>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>HotkeyModifiers</key>
 	<integer>9437448</integer>
 	<key>IRMemory</key>
@@ -30908,7 +30912,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdCAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAdKAAAAAAANIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -30932,13 +30936,13 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>853 555 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>370 331 700 437 0 0 1440 878 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 139 606 456 0 0 1440 878 </string>
+	<string>930 598 700 622 0 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>368 497 918 381 0 0 1440 878 </string>
+	<string>948 453 796 473 0 0 2560 1418 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 172 1440 706 0 0 1440 878 </string>
+	<string>0 4 2560 1414 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>493 49 650 473 0 0 2560 1418 </string>
 	<key>NeverWarnAboutShortLivedSessions_DD1B6308-EE2E-4B59-B796-13716040A38C</key>
@@ -32640,7 +32644,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>Recycle</string>
+			<string>No</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Disable Printing</key>
@@ -32662,10 +32666,36 @@
 			</dict>
 			<key>Guid</key>
 			<string>A17082D8-38EC-4922-92C4-2E8DDB091845</string>
+			<key>Has Hotkey</key>
+			<true/>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
 			<real>0.89999997615814209</real>
+			<key>HotKey Activated By Modifier</key>
+			<false/>
+			<key>HotKey Alternate Shortcuts</key>
+			<array/>
+			<key>HotKey Characters</key>
+			<string></string>
+			<key>HotKey Characters Ignoring Modifiers</key>
+			<string></string>
+			<key>HotKey Key Code</key>
+			<integer>122</integer>
+			<key>HotKey Modifier Activation</key>
+			<integer>0</integer>
+			<key>HotKey Modifier Flags</key>
+			<integer>1048576</integer>
+			<key>HotKey Window Animates</key>
+			<true/>
+			<key>HotKey Window AutoHides</key>
+			<true/>
+			<key>HotKey Window Dock Click Action</key>
+			<integer>0</integer>
+			<key>HotKey Window Floats</key>
+			<false/>
+			<key>HotKey Window Reopens On Activation</key>
+			<false/>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -33875,6 +33905,10 @@
 	<string>22D0FF21-4B3D-4243-A956-13B72129154C</string>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>1</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -33959,7 +33993,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-08-17T12:25:15Z</date>
+	<date>2018-06-04T09:17:10Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -33990,6 +34024,8 @@
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1509959424</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>
@@ -34013,6 +34049,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.15</string>
+	<string>3.1.6</string>
 </dict>
 </plist>
