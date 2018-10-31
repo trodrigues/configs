@@ -11,6 +11,7 @@ if [ "$uname" = "Darwin" ] ; then
 
     export VAGRANT_DEFAULT_PROVIDER="virtualbox"
     export GOPATH="/usr/local/gocode"
+    export NVM_DIR="/Users/trodrigues/.nvm"
 
     # increase the number of processes per uid
     ulimit -u 400

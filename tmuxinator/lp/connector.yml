@@ -9,19 +9,19 @@ windows:
       layout: even-horizontal
       panes:
         - run:
-          - cd connector-ui
+          - cd connector-admin
           - make start
         - tests:
-          - cd connector-ui
+          - cd connector-admin
           - npm run test:watch
   - git:
       layout: even-horizontal
       panes:
         - gitsh:
-          - cd connector-ui
+          - cd connector-admin
           - gitsh
         - cuigit:
-          - cd connector-ui
+          - cd connector-admin
           - tig
   - assets:
       layout: even-horizontal

@@ -3,7 +3,7 @@ root: ~/laterpay
 
 windows:
   - webshell:
-      - cd webshell/dockerfiles
+      - cd webshell
       - docker-compose up -d cassandra redis postgres
       - sleep 20
       - docker-compose up -d

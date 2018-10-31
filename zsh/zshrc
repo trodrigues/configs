@@ -35,6 +35,7 @@ export CONFIGSHOME="$HOME/Dropbox/configs"
 
 export EDITOR=/usr/bin/vi
 
+export LANGUAGE=en_GB.UTF-8
 export LC_CTYPE=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8
 export LANG=en_GB.UTF-8
@@ -74,5 +75,4 @@ load_zsh_config private
 load_zsh_config parrot
 load_zsh_config laterpay
 
-export NVM_DIR="/Users/trodrigues/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
