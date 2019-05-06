@@ -4,10 +4,7 @@ root: ~/laterpay
 windows:
   - webshell:
       - cd webshell
-      - docker-compose up -d cassandra redis postgres
-      - sleep 20
-      - docker-compose up -d
-      - docker-compose logs --follow
+      - docker-compose -f docker-compose.yml -f ../mongoose/dockerfiles/mongoose_us.yml up
   - mongoose:
       layout: even-horizontal
       panes:

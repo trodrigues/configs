@@ -8,30 +8,15 @@ alias showzshrefcard="echo http://www.bash2zsh.com/zsh_refcard/refcard.pdf && ec
 mkcfglink() {
   if [ ! -h $HOME/$2 ] ; then
     ln -s $CONFIGSHOME/$1 $HOME/$2
+    if [ $? -gt 0 ] ; then
+      echo "Failed linking $1 to $2"
+    fi
   fi
 }
 
 reloadzshrc() {
-    if [ -f $SOURCE_ZSH_CONFIG_FILE ] ; then
-        echo "reloading from Dropbox"
-        cp $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
-    else
-        echo "fetching from github"
-        if [ ! -d $ZSH_CONFIG_DIR ] ; then mkdir $ZSH_CONFIG_DIR ; fi
-        if [ ! -d $ZSH_CONFIG_DIR/tmp ] ; then mkdir $ZSH_CONFIG_DIR/tmp ; fi
-        cd $ZSH_CONFIG_DIR/tmp
-        curl https://nodeload.github.com/trodrigues/configs/tarball/master -o configs.tar.gz
-
-        if [ -f configs.tar.gz ] ; then
-            tar xvzf configs.tar.gz
-            rm -f configs.tar.gz
-
-            cp -r */zsh/* ../
-            cd .. && rm -rf tmp
-
-            cp zshrc $ZSH_CONFIG_FILE
-        fi
-    fi
+    echo "reloading from Dropbox"
+    cp $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
     source $ZSH_CONFIG_FILE
 }
 

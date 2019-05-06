@@ -56,11 +56,24 @@ export AWS_REGION=us-east-1
 
 load_zsh_config zsh_helpers
 
+mkcfglink aws .aws
+mkcfglink gitconfig .gitconfig
+mkcfglink gitignore_global .gitignore_global
+mkcfglink vim/gvimrc.after .gvimrc.after
+mkcfglink vim/gvimrc.before .gvimrc.before
+mkcfglink vim/dot_vim/janus/vim/gvimrc .gvimrc
+mkcfglink hammerspoon .hammerspoon
+mkcfglink janus .janus
+mkcfglink janus.rake .janus.rake
+mkcfglink sshconfig .ssh/config
+mkcfglink tigrc .tigrc
+mkcfglink tmux.conf .tmux.conf
+mkcfglink tmuxinator .tmuxinator
 mkcfglink vim/vimrc.after .vimrc.after
 mkcfglink vim/vimrc.before .vimrc.before
 mkcfglink vim/dot_vim/janus/vim/vimrc .vimrc
-mkcfglink tmux.conf .tmux.conf
-mkcfglink tmuxinator .tmuxinator
+
+mkcfglink gygenvrc gyg/.envrc
 
 load_zsh_config visudo
 load_zsh_config darwin_configs
@@ -73,6 +86,5 @@ load_zsh_config npx_aliases
 
 load_zsh_config private
 load_zsh_config parrot
-load_zsh_config laterpay
 
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

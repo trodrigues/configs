@@ -1,0 +1,36 @@
+name: fishfarm
+root: ~/gyg
+
+windows:
+  - 🐠-cmd:
+      - cd fishfarm
+      - gygdev info
+  - 🐠-git:
+      layout: even-horizontal
+      panes:
+        - gitsh:
+          - cd fishfarm
+          - gitsh
+        - cuigit:
+          - cd fishfarm
+          - tig
+  - 🐠-customer:
+      - cd fishfarm/gyg/customer
+  - 🌍-cmd:
+      layout: even-horizontal
+      panes:
+        - gitsh:
+          - cd traveler-frontend
+          - NODE_ENV=development npm start
+        - cuigit:
+          - cd traveler-frontend
+  - 🌍-git:
+      layout: even-horizontal
+      panes:
+        - gitsh:
+          - cd traveler-frontend
+          - gitsh
+        - cuigit:
+          - cd traveler-frontend
+          - tig
+

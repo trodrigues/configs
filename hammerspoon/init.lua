@@ -120,17 +120,17 @@ end)
 
 
 -- switch to and from Note taking app
-prevFrontmost = nil
-hs.hotkey.bind({"cmd"}, "F2", function()
-  currentFrontmost = hs.application.frontmostApplication()
-  if currentFrontmost:name() ~= 'Notion' then
-    prevFrontmost = hs.application.frontmostApplication()
-    hs.application.get('Notion'):activate()
-  else
-    prevFrontmost:activate()
-    prevFrontmost = nil
-  end
-end)
+-- prevFrontmost = nil
+-- hs.hotkey.bind({"cmd"}, "F2", function()
+--   currentFrontmost = hs.application.frontmostApplication()
+--   if currentFrontmost:name() ~= 'Notion' then
+--     prevFrontmost = hs.application.frontmostApplication()
+--     hs.application.get('Notion'):activate()
+--   else
+--     prevFrontmost:activate()
+--     prevFrontmost = nil
+--   end
+-- end)
 
 -- enhance desktop switch shortcuts to switch vertical screen as well
 -- do this only for the Hackintosh

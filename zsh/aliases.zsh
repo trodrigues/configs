@@ -22,7 +22,11 @@ alias sync-music="rsync -avz /Users/trodrigues/Music/iTunes/iTunes\ Media/Music/
 
 alias git-firewall-bypass="git config --global url.\"https://\".insteadOf git://"
 
-npm-open(){
+function show-notification(){
+  osascript $HOME/Dropbox/configs/applescripts/notification.as
+}
+
+function npm-open(){
   open https://npmjs.com/package/$1
 }
 
@@ -30,6 +34,7 @@ function lag() {
   ag --color "$@" | less -r
 }
 
+alias mux="tmuxinator"
 function mux-stop() {
   tmux kill-session -t $1
 }

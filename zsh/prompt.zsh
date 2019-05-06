@@ -53,3 +53,6 @@ function prompt {
     PS1=$PS1$'\n'"%F{green}%#%f "
 }
 prompt
+
+# necessary for tmux gitbar
+#precmd() { eval "$PROMPT_COMMAND" }
