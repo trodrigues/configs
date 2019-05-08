@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontFamily": "Menlo for Powerline",
+    "editor.fontFamily": "Menlo",
     "files.autoSave": "onFocusChange",
     "editor.wordWrap": true,
     "editor.tabSize": 2,
@@ -50,6 +50,10 @@
             "value": "#639"
         },
         {
+            "name": "Java Blue-Gray",
+            "value": "#557c9b"
+        },
+        {
             "name": "JavaScript Yellow",
             "value": "#f9e64f"
         },
@@ -79,5 +83,8 @@
         }
     ],
     "peacock.affectActivityBar": true,
-    "workbench.fontAliasing": "auto"
+    "workbench.fontAliasing": "auto",
+    "prettier.eslintIntegration": true,
+    "prettier.requireConfig": true,
+    "editor.formatOnSave": true
 }

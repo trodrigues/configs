@@ -7,6 +7,7 @@
         "EditorConfig.EditorConfig",
         "eg2.tslint",
         "erik-rosengren.dark-candy",
+        "esbenp.prettier-vscode",
         "felixfbecker.php-debug",
         "felixfbecker.php-intellisense",
         "GitHub.vscode-pull-request-github",

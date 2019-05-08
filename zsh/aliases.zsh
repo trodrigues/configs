@@ -53,3 +53,13 @@ function testcafe-firefox() {
   setopt -x
   testcafe 'path:`/Users/trodrigues/Applications/Firefox.app`' $@
 }
+
+alias kitty="/Applications/kitty.app/Contents/MacOS/kitty"
+
+function ssh() {
+  if [ "$TERM" = "xterm-kitty" ] ; then
+    kitty +kitten ssh $@
+  else
+    ssh $@
+  fi
+}
