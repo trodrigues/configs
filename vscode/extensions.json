@@ -3,6 +3,7 @@
         "akamud.vscode-theme-onelight",
         "alefragnani.project-manager",
         "arcticicestudio.nord-visual-studio-code",
+        "bungcip.better-toml",
         "dbaeumer.vscode-eslint",
         "EditorConfig.EditorConfig",
         "eg2.tslint",
@@ -24,6 +25,7 @@
         "ronnidc.nunjucks",
         "ryu1kn.edit-with-shell",
         "SmukkeKim.theme-setimonokai",
-        "vscodevim.vim"
+        "vscodevim.vim",
+        "wesbos.theme-cobalt2"
     ]
 }

@@ -11,3 +11,4 @@ vim/dot_vim
 zsh/private.zsh
 aws
 sshkeys
+ngrok

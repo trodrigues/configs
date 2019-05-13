@@ -1,0 +1,14 @@
+name: twitter-cleanup
+root: ~/code/twitter-cleanup
+
+windows:
+  - server:
+      layout: even-horizontal
+      panes:
+        - npm run serve
+        - ls
+  - git:
+      layout: even-horizontal
+      panes:
+        - gitsh
+        - tig
