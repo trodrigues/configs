@@ -85,6 +85,6 @@
     "workbench.fontAliasing": "auto",
     "prettier.eslintIntegration": true,
     "prettier.requireConfig": true,
-    "editor.formatOnSave": true,
-    "breadcrumbs.enabled": true
+    "breadcrumbs.enabled": true,
+    "editor.formatOnSave": true
 }

@@ -118,19 +118,31 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   win:setFrame(frame)
 end)
 
-
--- switch to and from Note taking app
--- prevFrontmost = nil
--- hs.hotkey.bind({"cmd"}, "F2", function()
---   currentFrontmost = hs.application.frontmostApplication()
---   if currentFrontmost:name() ~= 'Notion' then
---     prevFrontmost = hs.application.frontmostApplication()
---     hs.application.get('Notion'):activate()
---   else
---     prevFrontmost:activate()
---     prevFrontmost = nil
---   end
+-- hs.hotkey.bind({"cmd"}, "F1", function()
+-- 	hs.execute[['/Applications/kitty.app/Contents/MacOS/kitty' '--start-as=normal' '-1' '-o' 'remember_window_size=no' '-o' 'initial_window_width=640' '-o' 'initial_window_height=400' '-o' 'hide_window_decorations=no' '-d' '~']];
 -- end)
+
+-- switch to and from a given app
+function activateAppOnCmd(appName, key)
+  prevFrontmost = nil
+  hs.hotkey.bind({"cmd"}, key, function()
+    currentFrontmost = hs.application.frontmostApplication()
+    if currentFrontmost:name() ~= appName then
+      prevFrontmost = hs.application.frontmostApplication()
+      app = hs.application.get(appName)
+      if (app) then
+        app:activate()
+      end
+    else
+      prevFrontmost:activate()
+      prevFrontmost = nil
+    end
+  end)
+end
+
+activateAppOnCmd('kitty', 'F1')
+activateAppOnCmd('Notion', 'F2')
+
 
 -- enhance desktop switch shortcuts to switch vertical screen as well
 -- do this only for the Hackintosh

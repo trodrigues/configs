@@ -58,6 +58,7 @@ load_zsh_config zsh_helpers
 
 mkcfglink aws .aws
 mkcfglink kitty .config/kitty
+mkcfglink ngrok .ngrok
 mkcfglink gitconfig .gitconfig
 mkcfglink gitignore_global .gitignore_global
 mkcfglink vim/gvimrc.after .gvimrc.after
