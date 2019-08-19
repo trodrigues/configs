@@ -1,4 +1,4 @@
-alias ls="ls $colorarg"
+alias ls="exa $colorarg"
 alias ll="ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
