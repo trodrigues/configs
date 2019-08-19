@@ -50,7 +50,7 @@ function prompt {
     if [ "$SSH_TTY" != "" ] ; then
         PS1=$PS1"%F{magenta}%m%f"
     fi
-    PS1=$PS1$'\n'"%F{green}%#%f "
+    PS1=$PS1$'\n'"%F{green}>%f "
 }
 prompt
 

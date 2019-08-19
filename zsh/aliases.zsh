@@ -63,3 +63,8 @@ function ssh() {
     ssh $@
   fi
 }
+
+function roonya() {
+	cp /Applications/kitty.app/Contents/Resources/kitty.icns /Applications/kitty.app/Contents/Resources/kitty.icns.bak
+	cp ~/Dropbox/roonya.icns /Applications/kitty.app/Contents/Resources/kitty.icns
+}

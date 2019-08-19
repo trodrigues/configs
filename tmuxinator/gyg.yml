@@ -1,9 +1,8 @@
-name: fishfarm
+name: gyg
 root: ~/gyg
 
 windows:
-  - 🐠-cmd:
-      - cd fishfarm
+  - 💻-cmd:
       - gygdev info
   - 🐠-git:
       layout: even-horizontal
@@ -33,4 +32,10 @@ windows:
         - cuigit:
           - cd traveler-frontend
           - tig
+  - gyg1:
+      - ls
+  - gyg2:
+      - ls
+  - gyg3:
+      - ls
 

@@ -49,6 +49,10 @@
             "value": "#639"
         },
         {
+            "name": "Go Cyan",
+            "value": "#5dc9e2"
+        },
+        {
             "name": "Java Blue-Gray",
             "value": "#557c9b"
         },
@@ -83,8 +87,10 @@
     ],
     "peacock.affectActivityBar": true,
     "workbench.fontAliasing": "auto",
-    "prettier.eslintIntegration": true,
     "prettier.requireConfig": true,
     "breadcrumbs.enabled": true,
+    "vetur.useWorkspaceDependencies": true,
+    "prettier.htmlWhitespaceSensitivity": "ignore",
+    "prettier.eslintIntegration": true,
     "editor.formatOnSave": true
 }
