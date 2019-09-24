@@ -34,7 +34,7 @@ if [ "$uname" = "Darwin" ] ; then
     export VAGRANT_DEFAULT_PROVIDER="virtualbox"
 
     # increase the number of processes per uid
-    ulimit -u 512
+    ulimit -u 1024
     ulimit -n 6000
 
     if [ -f /usr/local/etc/cacert.pem ] ; then

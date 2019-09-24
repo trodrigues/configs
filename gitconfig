@@ -3,7 +3,7 @@
 	email = tmcrodrigues@gmail.com
 [alias]
     ci = commit
-    co = checkout
+    sw = switch
     st = status
     br = branch
     mg = merge

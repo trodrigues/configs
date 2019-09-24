@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.fontFamily": "Menlo",
+    "editor.fontFamily": "Cascadia Code",
     "files.autoSave": "onFocusChange",
     "editor.wordWrap": true,
     "editor.tabSize": 2,
@@ -92,5 +92,7 @@
     "vetur.useWorkspaceDependencies": true,
     "prettier.htmlWhitespaceSensitivity": "ignore",
     "prettier.eslintIntegration": true,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "typescript.updateImportsOnFileMove.enabled": "never",
+    "editor.fontLigatures": true
 }

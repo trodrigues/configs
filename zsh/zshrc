@@ -54,6 +54,8 @@ load_zsh_config(){
 export AWS_PROFILE=default
 export AWS_REGION=us-east-1
 
+# show ls -l in one column in exa
+
 load_zsh_config zsh_helpers
 
 mkcfglink aws .aws

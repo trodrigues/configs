@@ -20,9 +20,10 @@ windows:
       panes:
         - gitsh:
           - cd traveler-frontend
-          - NODE_ENV=development npm start
+          - gygdev logs --follow traveler-frontend
         - cuigit:
           - cd traveler-frontend
+          - echo "npm run start:dev-ext"
   - 🌍-git:
       layout: even-horizontal
       panes:

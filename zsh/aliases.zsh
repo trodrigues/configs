@@ -1,5 +1,5 @@
 alias ls="exa $colorarg"
-alias ll="ls $colorarg -l"
+alias ll="COLUMNS=60 ls $colorarg -l"
 alias la="ls $colorarg -a"
 alias lla="ls $colorarg -la"
 
@@ -67,4 +67,12 @@ function ssh() {
 function roonya() {
 	cp /Applications/kitty.app/Contents/Resources/kitty.icns /Applications/kitty.app/Contents/Resources/kitty.icns.bak
 	cp ~/Dropbox/roonya.icns /Applications/kitty.app/Contents/Resources/kitty.icns
+}
+
+function take_home_test_container() {
+	if [ "$1" = "" ] ; then
+		echo "Please specify the port of the development server"
+		exit 1
+	fi
+	docker run --rm -p 4000:$1 -v `pwd`:/app -w /app -it node:10 bash
 }
