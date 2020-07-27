@@ -2,29 +2,26 @@ name: gyg
 root: ~/gyg
 
 windows:
-  - 💻-cmd:
+  - gygdev:
       - gygdev info
-  - 🐠-git:
+  - cmd:
+      - cd cmd
+  - ff:
       layout: even-horizontal
       panes:
-        - gitsh:
+        - cmd:
+          - cd fishfarm/gyg/customer
+        - cuigit:
           - cd fishfarm
           - gitsh
-        - cuigit:
-          - cd fishfarm
-          - tig
-  - 🐠-customer:
-      - cd fishfarm/gyg/customer
-  - 🌍-cmd:
+  - tfe-cmd:
       layout: even-horizontal
       panes:
         - gitsh:
           - cd traveler-frontend
-          - gygdev logs --follow traveler-frontend
         - cuigit:
           - cd traveler-frontend
-          - echo "npm run start:dev-ext"
-  - 🌍-git:
+  - tfe-git:
       layout: even-horizontal
       panes:
         - gitsh:

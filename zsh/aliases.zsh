@@ -1,7 +1,12 @@
-alias ls="exa $colorarg"
-alias ll="COLUMNS=60 ls $colorarg -l"
-alias la="ls $colorarg -a"
-alias lla="ls $colorarg -la"
+which exa > /dev/null
+if [ $? -eq 0 ] ; then
+  alias ls="exa"
+  alias ll="COLUMNS=60 ls -l"
+  alias ls1="ls -1"
+  alias lt1="ls -T --level=1"
+  alias la="ls -a"
+  alias lla="COLUMNS=60 ls -la"
+fi
 
 alias pu="pushd"
 alias po="popd"
@@ -54,16 +59,6 @@ function testcafe-firefox() {
   testcafe 'path:`/Users/trodrigues/Applications/Firefox.app`' $@
 }
 
-alias kitty="/Applications/kitty.app/Contents/MacOS/kitty"
-
-function ssh() {
-  if [ "$TERM" = "xterm-kitty" ] ; then
-    kitty +kitten ssh $@
-  else
-    ssh $@
-  fi
-}
-
 function roonya() {
 	cp /Applications/kitty.app/Contents/Resources/kitty.icns /Applications/kitty.app/Contents/Resources/kitty.icns.bak
 	cp ~/Dropbox/roonya.icns /Applications/kitty.app/Contents/Resources/kitty.icns
@@ -74,5 +69,32 @@ function take_home_test_container() {
 		echo "Please specify the port of the development server"
 		exit 1
 	fi
-	docker run --rm -p 4000:$1 -v `pwd`:/app -w /app -it node:10 bash
+	docker run --rm -p 4000:$1 -v `pwd`:/app -w /app -it node:10-buster bash
 }
+
+function docker_node_container() {
+	docker run --rm -v `pwd`:/app -w /app -it node:12-buster bash
+}
+
+function git-bd() {
+  local r="refs"
+  [[ $1 ]] && r="$r/remotes/$1" || r="$r/heads"
+  while read l; do
+    echo ${l}
+    echo "  " $(git log --date=short -1 --format="%ad %h  %s" ${l})
+  done <<< $(git for-each-ref --format='%(refname:short)' --sort=-committerdate ${r})
+}
+
+
+which explorer.exe > /dev/null
+if [ $? -eq 0 ] ; then
+  alias open=explorer.exe
+  alias pbcopy=clip.exe
+fi
+
+which xclip > /dev/null
+if [ $? -eq 0 ] ; then
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
+

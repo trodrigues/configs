@@ -1,5 +1,5 @@
 SOURCE_ZSH_CONFIG_DIR="$CONFIGSHOME/zsh"
-SOURCE_ZSH_CONFIG_FILE="$SOURCE_ZSH_CONFIG_DIR/zshrc"
+SOURCE_ZSH_CONFIG_FILE="$SOURCE_ZSH_CONFIG_DIR/zshrc.zsh"
 ZSH_CONFIG_DIR="$HOME/.zsh"
 ZSH_CONFIG_FILE="$HOME/.zshrc"
 
@@ -16,7 +16,8 @@ mkcfglink() {
 
 reloadzshrc() {
     echo "reloading from Dropbox"
-    cp $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
+    rm -f $ZSH_CONFIG_FILE
+    ln -s $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
     source $ZSH_CONFIG_FILE
 }
 

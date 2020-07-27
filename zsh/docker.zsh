@@ -47,3 +47,7 @@ linux-shell() {
 linux-run() {
   docker run -it linux $*
 }
+
+docker-stats-tfe() {
+	docker stats --format "{{.Container}} {{.CPUPerc}} {{.MemUsage}}" gyg_traveler-frontend_web_1
+}

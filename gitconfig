@@ -15,17 +15,10 @@
     standup = "!git log --since yesterday --author `git config user.email` --pretty=short"
     show-files = show --name-status
   last-hash = log -n 1 --format=%h
-[difftool "Kaleidoscope"]
-[difftool]
-[diff]
 [core]
 	excludesfile = /Users/trodrigues/.gitignore_global
-[difftool "Kaleidoscope"]
-	cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
 [difftool]
 	prompt = false
-[diff]
-	tool = Kaleidoscope
 [color]
 	ui = true
 [branch]
