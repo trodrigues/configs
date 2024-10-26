@@ -10,9 +10,10 @@ end)
 
 function rsutils()
   local win = hs.window.frontmostWindow()
-  log:d(win)
+  log:d('window', win)
   local frame = win:frame()
   local screen = win:screen()
+  log:d('screen', screen)
   local viewp  = screen:frame()
   return win, frame, screen, viewp
 end
@@ -22,19 +23,19 @@ hs.hotkey.bind({"shift", "alt", "ctrl"}, "down", function()
   win, frame, screen, viewp = rsutils()
   frame.x = viewp.x
   frame.y = viewp.y
-  frame.w = (viewp.w / 6) * 4
+  frame.w = (viewp.w / 8) * 6
   frame.h = viewp.h
-  win:setFrame(frame)
+  win:setFrame(frame, 0)
 end)
 
 -- sizes window to 3rds width, right aligned, max height
 hs.hotkey.bind({"shift", "alt", "ctrl"}, "up", function()
   win, frame, screen, viewp = rsutils()
-  frame.x = viewp.x + (viewp.w / 6) * 2
+  frame.x = viewp.x + (viewp.w / 8) * 2
   frame.y = viewp.y
-  frame.w = (viewp.w / 6) * 4
+  frame.w = (viewp.w / 8) * 6
   frame.h = viewp.h
-  win:setFrame(frame)
+  win:setFrame(frame, 0)
 end)
 
 -- sizes window to half width, left aligned, max height
@@ -44,7 +45,7 @@ hs.hotkey.bind({"shift", "alt", "ctrl"}, "left", function()
   frame.y = viewp.y
   frame.w = viewp.w / 2
   frame.h = viewp.h
-  win:setFrame(frame)
+  win:setFrame(frame, 0)
 end)
 
 -- sizes window to half width, right aligned, max height
@@ -54,7 +55,7 @@ hs.hotkey.bind({"shift", "alt", "ctrl"}, "right", function()
   frame.y = viewp.y
   frame.w = viewp.w / 2
   frame.h = viewp.h
-  win:setFrame(frame)
+  win:setFrame(frame, 0)
 end)
 
 windowSizes = {}
@@ -79,11 +80,11 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "m", function()
   local id = win:id()
   if not isMaximized() then
     windowSizes[id] = frame
-    win:maximize()
+    win:maximize(0)
   elseif windowSizes[id] ~= nil then
     local prevFrame = windowSizes[id]
     windowSizes[id] = nil
-    win:setFrame(prevFrame)
+    win:setFrame(prevFrame, 0)
   end
 end)
 
@@ -92,30 +93,18 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "v", function()
   win, frame, screen, viewp = rsutils()
   frame.y = viewp.y
   frame.h = viewp.h
-  win:setFrame(frame)
-end)
-
--- send to top screen
-hs.hotkey.bind({"alt", "ctrl"}, "up", function()
-  local win = hs.window.focusedWindow()
-  win:moveOneScreenNorth()
-end)
-
--- send to bottom screen
-hs.hotkey.bind({"alt", "ctrl"}, "down", function()
-  local win = hs.window.focusedWindow()
-  win:moveOneScreenSouth()
+  win:setFrame(frame, 0)
 end)
 
 -- send to left screen
 hs.hotkey.bind({"alt", "ctrl"}, "left", function()
-  local win = hs.window.focusedWindow()
+  win, frame, screen, viewp = rsutils()
   win:moveOneScreenWest()
 end)
 
 -- send to right screen
 hs.hotkey.bind({"alt", "ctrl"}, "right", function()
-  local win = hs.window.focusedWindow()
+  win, frame, screen, viewp = rsutils()
   win:moveOneScreenEast()
 end)
 
@@ -127,7 +116,7 @@ hs.hotkey.bind({"cmd", "alt", "ctrl"}, "c", function()
   frame.y = viewp.y
   frame.w = viewp.w - sevenths * 2
   frame.h = viewp.h
-  win:setFrame(frame)
+  win:setFrame(frame, 0)
 end)
 
 -- switch to and from a given app

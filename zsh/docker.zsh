@@ -1,6 +1,6 @@
 # Remove all existing containers
 docker-rm-ps(){
-  docker rm `docker ps -a -q`
+  docker rm -f $(docker ps -a -q)
 }
 
 # Remove containers using the supplied image name

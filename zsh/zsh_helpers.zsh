@@ -1,8 +1,3 @@
-SOURCE_ZSH_CONFIG_DIR="$CONFIGSHOME/zsh"
-SOURCE_ZSH_CONFIG_FILE="$SOURCE_ZSH_CONFIG_DIR/zshrc.zsh"
-ZSH_CONFIG_DIR="$HOME/.zsh"
-ZSH_CONFIG_FILE="$HOME/.zshrc"
-
 alias showzshrefcard="echo http://www.bash2zsh.com/zsh_refcard/refcard.pdf && echo https://github.com/robbyrussell/oh-my-zsh/tree/master/lib"
 
 mkcfglink() {
@@ -15,7 +10,7 @@ mkcfglink() {
 }
 
 reloadzshrc() {
-    echo "reloading from Dropbox"
+    echo "reloading from cloud"
     rm -f $ZSH_CONFIG_FILE
     ln -s $SOURCE_ZSH_CONFIG_FILE $ZSH_CONFIG_FILE
     source $ZSH_CONFIG_FILE

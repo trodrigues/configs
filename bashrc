@@ -71,8 +71,8 @@ alias killpid="$HOME/code/bashscripts/kill_by_pid.sh"
 
 alias tailaccess="tail -f $httpd_accesslog"
 alias tailerror="tail -f $httpd_errorlog"
-alias reloadbashrc="cp $HOME/Dropbox/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
-alias reloadzshrc="cp $HOME/Dropbox/configs/zshrc $HOME/.zshrc && source $HOME/.zshrc"
+alias reloadbashrc="cp $HOME/Nextcloud/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
+alias reloadzshrc="cp $HOME/Nextcloud/configs/zshrc $HOME/.zshrc && source $HOME/.zshrc"
 
 alias antena3="mplayer mms://rdp.oninet.pt/antena3"
 alias starcraft="wine software/games/Starcraft/StarCraft.exe"

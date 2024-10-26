@@ -31,36 +31,20 @@ typeset -ga chpwd_functions
 
 uname=$(uname)
 export CODEHOME="$HOME/code"
-export CONFIGSHOME="$HOME/Dropbox/configs"
+export CONFIGSHOME="$HOME/Nextcloud/configs"
+SOURCE_ZSH_CONFIG_DIR="$CONFIGSHOME/zsh"
+SOURCE_ZSH_CONFIG_FILE="$SOURCE_ZSH_CONFIG_DIR/zshrc.zsh"
+ZSH_CONFIG_FILE="$HOME/.zshrc"
+
+source $SOURCE_ZSH_CONFIG_DIR/zsh_helpers.zsh
+source $SOURCE_ZSH_CONFIG_DIR/zsh-defer/zsh-defer.plugin.zsh
 
 export EDITOR=/usr/bin/vi
 export TERM=xterm
 
-#export LANGUAGE=en_GB.UTF-8
-#export LC_CTYPE=en_GB.UTF-8
-#export LC_ALL=en_GB.UTF-8
-#export LANG=en_GB.UTF-8
-
-load_zsh_config(){
-    local configfile=$CONFIGSHOME/zsh/$1.zsh
-    if [ -f $configfile ] ; then
-        source $configfile
-    else
-        echo "Cannot load $configfile"
-    fi
-}
-
-load_zsh_config paths
+source $SOURCE_ZSH_CONFIG_DIR/paths.zsh
 
 eval "$(direnv hook zsh)"
-
-#export AWS_PROFILE=default
-#export AWS_REGION=us-east-1
-
-# exa
-#colorarg="-G"
-
-load_zsh_config zsh_helpers
 
 mkcfglink aws .aws
 mkcfglink ngrok .ngrok
@@ -77,17 +61,25 @@ if [ "$uname" = "Darwin" ] ; then
   mkcfglink hammerspoon .hammerspoon
 fi
 
-load_zsh_config visudo
+source $SOURCE_ZSH_CONFIG_DIR/visudo.zsh
+source $SOURCE_ZSH_CONFIG_DIR/prompt.zsh
+source $SOURCE_ZSH_CONFIG_DIR/aliases.zsh
+source $SOURCE_ZSH_CONFIG_DIR/docker.zsh
+source $SOURCE_ZSH_CONFIG_DIR/npx_aliases.zsh
 
-load_zsh_config prompt
-load_zsh_config aliases
-load_zsh_config docker
-load_zsh_config npx_aliases
-
-load_zsh_config private
+zsh-defer source $SOURCE_ZSH_CONFIG_DIR/private.zsh
 
 which keychain > /dev/null
 if [ $? -eq 0 ] ; then
   eval `keychain --eval --agents ssh id_ed25519`
 fi
 
+# pnpm
+export PNPM_HOME="/Users/trodrigues/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+source /Users/trodrigues/.config/broot/launcher/bash/br

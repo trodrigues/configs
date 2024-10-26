@@ -1,6 +1,6 @@
-which exa > /dev/null
+which eza > /dev/null
 if [ $? -eq 0 ] ; then
-  alias ls="exa"
+  alias ls="eza"
   alias ll="COLUMNS=60 ls -l"
   alias ls1="ls -1"
   alias lt1="ls -T --level=1"
@@ -21,9 +21,9 @@ alias timestamp="date \"+%Y%m%d%H%M%S\""
 
 alias rm_vim_mchars="perl -pi -e '$m=chr(13);s/$m//g'"
 
-alias reloadbashrc="cp $HOME/Dropbox/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
+alias reloadbashrc="cp $HOME/Nextcloud/configs/bashrc $HOME/.bashrc && source $HOME/.bashrc"
 
-alias setgitignore="cp $HOME/Dropbox/configs/gitignore .gitignore"
+alias setgitignore="cp $HOME/Nextcloud/configs/gitignore .gitignore"
 
 alias git-firewall-bypass="git config --global url.\"https://\".insteadOf git://"
 
@@ -32,7 +32,7 @@ alias grep-node="ps aux|grep -v 'Code Helper'|grep -v 'Visual Studio'|grep -v Di
 alias echo-path="echo $PATH|tr ':' '\n'"
 
 function show-notification(){
-  osascript $HOME/Dropbox/configs/applescripts/notification.as
+  osascript $HOME/Nextcloud/configs/applescripts/notification.as
 }
 
 alias pn="pnpm"
@@ -111,3 +111,6 @@ zle -N clear-scrollback-buffer
 function node-legacy {
   export NODE_OPTIONS=--openssl-legacy-provider
 }
+
+alias obsidiantoicloud="rsync -av /Users/trodrigues/Nextcloud/Obsidian\ Vault/ /Users/trodrigues/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Obsidian\ Vault/"
+alias icloudtoobsidian="rsync -av /Users/trodrigues/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Obsidian\ Vault/ /Users/trodrigues/Nextcloud/Obsidian\ Vault/"
