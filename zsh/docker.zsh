@@ -48,3 +48,6 @@ linux-run() {
   docker run -it linux $*
 }
 
+docker_node_container() {
+	docker run --rm -v `pwd`:/app -w /app -it node:14-buster bash
+}

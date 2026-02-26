@@ -8,6 +8,9 @@
     br = branch
     mg = merge
     cp = cherry-pick
+    po = push origin
+    fp = push -f origin
+    pf = push -f origin
     spush = svn dcommit
     spull = svn rebase
     lg = log --color
@@ -18,12 +21,15 @@
     last-hash = log -n 1 --format=%h
     wip = commit -am "wip" --no-verify
     soft-reset = reset HEAD~1
+    hard-reset = reset --hard HEAD
 [core]
 	excludesfile = /Users/trodrigues/.gitignore_global
 [difftool]
 	prompt = false
 [color]
 	ui = true
+[pager]
+    branch = false
 [branch]
   autosetuprebase = always
 [push]
@@ -35,8 +41,13 @@
 [init]
 	defaultBranch = main
 [credential "https://github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
+	helper =
 	helper = !/opt/homebrew/bin/gh auth git-credential
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

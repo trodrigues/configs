@@ -16,14 +16,9 @@ if [ "$uname" = "Darwin" ] ; then
     # rustup env
     . "$HOME/.cargo/env"
 
-    #. $(brew --prefix asdf)/libexec/asdf.sh
-
     eval "$(fnm env)"
     # add local node modules to path
     export PATH="$PATH:./node_modules/.bin"
-
-    # x86 dotnet
-    #export PATH="$PATH:/usr/local/share/dotnet/x64"
 
     # homebrew ruby
     export PATH="$HOMEBREW/opt/ruby/bin:$PATH"
@@ -45,7 +40,7 @@ if [ "$uname" = "Darwin" ] ; then
     # rbenv ruby
     #export PATH="$PATH:$HOME/.rbenv/bin"
     #eval "$(rbenv init -)"
-    
+
     # go
     export PATH="$PATH:$HOMEBREW/gocode/bin"
     export GOPATH="$HOMEBREW/gocode"
@@ -54,7 +49,7 @@ if [ "$uname" = "Darwin" ] ; then
     #eval "$(jenv init -)"
 
     export PATH="/Applications/IntelliJ IDEA.app/Contents/MacOS:$PATH"
-    
+
     export PATH="$PATH:/usr/X11/bin:$HOMEBREW/git/bin"
 
     export HOMEBREW_CASK_OPTS="--appdir=/Applications"
